@@ -1,6 +1,7 @@
 package com.example.schooljournal.data
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "day_table")
@@ -10,7 +11,7 @@ data class Day(
     val weekId: Int,
     val date: Int,
     val dayOfTheWeek: String,
-    val subject: List<Subject>
+    val subjects: List<String>?
 )
 
 @Entity(tableName = "subject_table")
@@ -20,7 +21,7 @@ data class Subject(
     val dayId: Int,
     val name: String,
     val teacher: String,
-    val mark: Int,
+    val mark: String,
     val homework: String
 )
 
@@ -28,7 +29,7 @@ data class Subject(
 data class Week(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val dayOfTheWeek: List<Day>,
+    val day: List<Day>,
     val note: Note
 )
 
