@@ -71,4 +71,6 @@ dependencies {
 
     //DataBinding
     kapt "com.android.databinding:compiler:3.2.0-alpha10"
+
+    implementation 'com.google.code.gson:gson:2.8.6'
 }
