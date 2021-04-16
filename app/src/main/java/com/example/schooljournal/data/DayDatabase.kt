@@ -1,5 +1,6 @@
 package com.example.schooljournal.data
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.icu.text.SimpleDateFormat
 import androidx.room.Database
@@ -30,12 +31,10 @@ abstract class DayDatabase : RoomDatabase() {
                 context.applicationContext,
                 DayDatabase::class.java, "Day.db"
             )
-                // prepopulate the database after onCreate was called
                 .addCallback(object : Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
-                        main()
-                        kk()
+                        autoInsertData()
                         ioThread {
                             getInstance(context).dayDao().insertData(PREPOPULATE_DATA)
                         }
@@ -43,19 +42,17 @@ abstract class DayDatabase : RoomDatabase() {
                 })
                 .build()
 
+        private fun autoInsertData() {
+            insertDates()
+            insertDays()
+        }
+
         val PREPOPULATE_DATA = mutableListOf<Day>()
-        var days: MutableList<String> = mutableListOf()
+        private val days: MutableList<String> = mutableListOf()
         private val subjects = emptyList<Subject>()
-        private val subj: List<Subject> = listOf(
-            Subject(0, 0, "English", "Smb", " ", "smth..."),
-            Subject(0, 0, "Maths", "Smb", " ", "smth..."),
-            Subject(0, 0, "History", "Smb", " ", "smth..."),
-            Subject(0, 0, "Physics", "Smb", " ", "smth..."),
-            Subject(0, 0, "Chemistry", "Smb", " ", "smth...")
-        )
 
-
-        fun main() {
+        @SuppressLint("SimpleDateFormat")
+        private fun insertDates() {
             val dateFormat = SimpleDateFormat("yyyyMMdd-EE")
             var calendar = Calendar.getInstance()
             for (i in 0..365) {
@@ -66,7 +63,7 @@ abstract class DayDatabase : RoomDatabase() {
             }
         }
 
-        fun kk() {
+        private fun insertDays() {
             for (i in 0 until days.size) {
                 val day =
                     Day(0, 1, days[i].substring(0, 8).toInt(), days[i].substring(9, 11), subjects)

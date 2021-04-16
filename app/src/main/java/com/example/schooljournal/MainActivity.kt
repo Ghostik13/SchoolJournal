@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         val taskDao = DayDatabase.getInstance(application).dayDao()
 
         GlobalScope.launch(Dispatchers.IO) {
-            days = taskDao.getData()
+            days = taskDao.getDays()
             subjects = taskDao.getSubjects()
         }
     }
