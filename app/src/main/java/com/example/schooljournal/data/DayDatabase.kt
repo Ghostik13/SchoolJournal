@@ -38,7 +38,6 @@ abstract class DayDatabase : RoomDatabase() {
                         kk()
                         ioThread {
                             getInstance(context).dayDao().insertData(PREPOPULATE_DATA)
-                            getInstance(context).dayDao().insertSubjects(subjects)
                         }
                     }
                 })
@@ -46,7 +45,8 @@ abstract class DayDatabase : RoomDatabase() {
 
         val PREPOPULATE_DATA = mutableListOf<Day>()
         var days: MutableList<String> = mutableListOf()
-        private val subjects: List<Subject> = listOf(
+        private val subjects = emptyList<Subject>()
+        private val subj: List<Subject> = listOf(
             Subject(0, 0, "English", "Smb", " ", "smth..."),
             Subject(0, 0, "Maths", "Smb", " ", "smth..."),
             Subject(0, 0, "History", "Smb", " ", "smth..."),
