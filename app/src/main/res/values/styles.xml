@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="add_subj_et">
+        <item name="android:layout_width">340dp</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_marginTop">120dp</item>
+        <item name="android:background">@drawable/custom_input</item>
+        <item name="android:drawableStart">@drawable/ic_subject</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:fontFamily">@font/myriad_regular</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:textColor">@color/dark_gray</item>
+        <item name="android:visibility">invisible</item>
+    </style>
+
+    <style name="next_iv">
+        <item name="android:layout_width">55dp</item>
+        <item name="android:layout_height">55dp</item>
+        <item name="android:layout_marginEnd">24dp</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="tv_dow">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">24dp</item>
+        <item name="android:fontFamily">@font/myriad_bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">36sp</item>
+    </style>
+
+    <style name="fab">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">24dp</item>
+        <item name="android:layout_marginBottom">24dp</item>
+        <item name="android:clickable">true</item>
+    </style>
+</resources>

@@ -30,8 +30,8 @@ class WeekDaysFragment : Fragment() {
 
         val dayDao = activity.let { DayDatabase.getInstance(it!!.application).dayDao() }
         initFab(view)
-        view.add_button.setOnClickListener {
-            insertSubjects(view, dayDao, "Mo")
+        view.next_button.setOnClickListener {
+            insertSubjects(view, dayDao, "пн")
         }
         return view
     }
