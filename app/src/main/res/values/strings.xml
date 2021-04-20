@@ -2,4 +2,15 @@
     <string name="app_name">School Journal</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_subject">Введите название предмета …</string>
+    <string name="top_text">
+        Выберите день\nи введите учебные предметы
+    </string>
+    <string name="mon">Пн</string>
+    <string name="tue">Вт</string>
+    <string name="wed">Ср</string>
+    <string name="thu">Чт</string>
+    <string name="fri">Пт</string>
+    <string name="sat">Сб</string>
+    <string name="sun">Вс</string>
+    <string name="ready">Готово</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.schooljournal
 
+import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,14 +8,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.MutableLiveData
 import com.example.schooljournal.data.DayDao
 import com.example.schooljournal.data.DayDatabase
 import com.example.schooljournal.data.Subject
+import com.example.schooljournal.databinding.FragmentWeekDaysBinding
+import kotlinx.android.synthetic.main.fragment_week_days.*
 import kotlinx.android.synthetic.main.fragment_week_days.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
+private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
 
 class WeekDaysFragment : Fragment() {
 
@@ -22,18 +30,32 @@ class WeekDaysFragment : Fragment() {
     private lateinit var mondaysId: List<Int>
     private val subjects: MutableList<Subject> = mutableListOf()
 
+    private lateinit var binding: FragmentWeekDaysBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_week_days, container, false)
+    ): View {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_week_days, container, false)
 
         val dayDao = activity.let { DayDatabase.getInstance(it!!.application).dayDao() }
-        initFab(view)
-        view.next_button.setOnClickListener {
-            insertSubjects(view, dayDao, "пн")
+  //      initFab(binding.root)
+        binding.root.next_button.setOnClickListener {
+            insertSubjects(binding.root, dayDao, "пн")
         }
-        return view
+        return binding.root
+    }
+
+
+    companion object {
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            WeekDaysFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
+                }
+            }
     }
 
     private fun insertSubjects(view: View, dayDao: DayDao, dayOfWeek: String) {
@@ -71,37 +93,42 @@ class WeekDaysFragment : Fragment() {
         }
     }
 
+    private var flag = 0
+
     private fun initFab(view: View) {
-        var flag = 0
         view.fab.setOnClickListener {
-            when {
-                flag == 0 -> {
-                    view.first_subject.visibility = View.VISIBLE
-                    flag = 1
-                }
-                flag == 1 -> {
-                    view.second_subject.visibility = View.VISIBLE
-                    flag = 2
-                }
-                flag == 2 -> {
-                    view.third_subject.visibility = View.VISIBLE
-                    flag = 3
-                }
-                flag == 3 -> {
-                    view.fourth_subject.visibility = View.VISIBLE
-                    flag = 4
-                }
-                flag == 4 -> {
-                    view.fifth_subject.visibility = View.VISIBLE
-                    flag = 5
-                }
-                flag == 5 -> {
-                    view.six_subject.visibility = View.VISIBLE
-                    flag = 6
-                }
-                view.six_subject.visibility == View.VISIBLE -> {
-                    view.seventh_subject.visibility = View.VISIBLE
-                }
+            addSubjectField()
+        }
+    }
+
+    fun addSubjectField() {
+        when {
+            flag == 0 -> {
+                first_subject.visibility = View.VISIBLE
+                flag = 1
+            }
+            flag == 1 -> {
+                second_subject.visibility = View.VISIBLE
+                flag = 2
+            }
+            flag == 2 -> {
+                third_subject.visibility = View.VISIBLE
+                flag = 3
+            }
+            flag == 3 -> {
+                fourth_subject.visibility = View.VISIBLE
+                flag = 4
+            }
+            flag == 4 -> {
+                fifth_subject.visibility = View.VISIBLE
+                flag = 5
+            }
+            flag == 5 -> {
+                six_subject.visibility = View.VISIBLE
+                flag = 6
+            }
+            six_subject.visibility == View.VISIBLE -> {
+                seventh_subject.visibility = View.VISIBLE
             }
         }
     }
