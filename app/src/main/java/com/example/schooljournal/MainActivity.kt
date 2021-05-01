@@ -10,7 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), Navigation {
 
     private lateinit var days: List<Day>
     private lateinit var subjects: List<Subject>
@@ -38,5 +38,17 @@ class MainActivity : AppCompatActivity() {
             days = taskDao.getDays()
             subjects = taskDao.getSubjects()
         }
+    }
+
+    override fun initSchedule(fragment: Fragment) {
+        replaceFragment(fragment)
+    }
+
+    override fun onBackPressed() {
+        initFragment()
+    }
+
+    override fun initPrevious() {
+        onBackPressed()
     }
 }

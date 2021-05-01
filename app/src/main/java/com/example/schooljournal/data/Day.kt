@@ -1,9 +1,6 @@
 package com.example.schooljournal.data
 
-import androidx.room.Entity
-import androidx.room.Ignore
-import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
+import androidx.room.*
 
 @Entity(tableName = "day_table")
 data class Day(
@@ -41,4 +38,9 @@ data class Note(
     val id: Int,
     val weekId: Int,
     val note: String
+)
+
+data class Sub(
+    @ColumnInfo(name = "subjects")
+    val subjects: List<Subject>
 )
