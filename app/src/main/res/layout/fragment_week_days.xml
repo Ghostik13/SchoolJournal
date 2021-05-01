@@ -5,8 +5,11 @@
 
     <data>
         <variable
-            name="fragment"
-            type="com.example.schooljournal.WeekDaysFragment" />
+            name="viewModel"
+            type="com.example.schooljournal.weekDayView.WeekDayViewModel" />
+        <variable
+            name="nameOfDay"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,6 +30,7 @@
             <TextView
                 android:id="@+id/dow_tv"
                 style="@style/tv_dow"
+                android:text="@{nameOfDay}"
                 android:textIsSelectable="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

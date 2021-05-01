@@ -1,15 +1,14 @@
-package com.example.schooljournal.WeekDayView
+package com.example.schooljournal.weekDayView
 
-import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.schooljournal.*
 import com.example.schooljournal.data.DayDao
 import com.example.schooljournal.data.DayDatabase
@@ -22,23 +21,31 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-
-private const val ARG_PARAM1 = "param1"
-
 class WeekDaysFragment : Fragment() {
 
-
+    private lateinit var viewModel: WeekDayViewModel
     private lateinit var currentDayId: List<Int>
     private val subjects: MutableList<Subject> = mutableListOf()
-
-    private lateinit var binding: FragmentWeekDaysBinding
+    private lateinit var dayDao: DayDao
 
     private var text: String? = null
 
+    private lateinit var binding: FragmentWeekDaysBinding
+
+    companion object {
+        @JvmStatic
+        fun newInstance(dayName: String) =
+            WeekDaysFragment().apply {
+                arguments = Bundle().apply {
+                    putString(DAY_NAME, dayName)
+                }
+            }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            text = it.getString(ARG_PARAM1)
+        arguments?.getString(DAY_NAME).let {
+            text = it
         }
     }
 
@@ -48,21 +55,22 @@ class WeekDaysFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_week_days, container, false)
         val view = binding.root
-        val dayDao = activity.let {
+        viewModel = ViewModelProvider(this).get(WeekDayViewModel::class.java)
+        binding.nameOfDay = text
+        dayDao = activity.let {
             DayDatabase.getInstance(it!!.application).dayDao()
         }
         initFab(view)
         initNextButton(dayDao)
-        view.dow_tv.text = text
-        loadSubjects(dayDao)
+        loadSubjects()
         return view
     }
 
-    private fun loadSubjects(dayDao: DayDao) {
+    private fun loadSubjects() {
         GlobalScope.launch(Dispatchers.IO) {
             val subjectList = dayDao
-                    .loadSubjectsForCurrentDay(Parser(binding.root.dow_tv.text.toString()).parsingName)
-                    .subjects
+                .loadSubjectsForCurrentDay(Parser(text.toString()).parsingName)
+                .subjects
             withContext(Dispatchers.Main) {
                 if (subjectList.isNotEmpty()) {
                     binding.root.first_subject.setText(subjectList[0].name)
@@ -71,6 +79,7 @@ class WeekDaysFragment : Fragment() {
         }
     }
 
+
     private fun initNextButton(dayDao: DayDao) {
         binding.root.next_button.setOnClickListener {
             insertSubjects(binding.root, dayDao, Parser(dow_tv.text.toString()).parsingName)
@@ -78,17 +87,6 @@ class WeekDaysFragment : Fragment() {
                 (requireActivity() as Navigation).initSchedule(ScheduleCreateFragment())
             } else (requireActivity() as Navigation).initSchedule(dayFragments[Parser("").currentIndex])
         }
-    }
-
-
-    companion object {
-        @JvmStatic
-        fun newInstance(dayName: String) =
-            WeekDaysFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, dayName)
-                }
-            }
     }
 
     private fun insertSubjects(view: View, dayDao: DayDao, dayOfWeek: String) {
@@ -126,51 +124,18 @@ class WeekDaysFragment : Fragment() {
         }
     }
 
-    private var flag = 0
-
     private fun initFab(view: View) {
         view.fab.setOnClickListener {
-            addSubjectField()
+            viewModel.addSubjectField(
+                requireContext(),
+                first_subject,
+                second_subject,
+                third_subject,
+                fourth_subject,
+                fifth_subject,
+                six_subject,
+                seventh_subject
+            )
         }
-    }
-
-    private fun addSubjectField() {
-        val inputMethodManager =
-            requireContext().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        when (flag) {
-            0 -> {
-                etActiveOn(inputMethodManager, first_subject, 0)
-                flag = 1
-            }
-            1 -> {
-                etActiveOn(inputMethodManager, second_subject, 1)
-                flag = 2
-            }
-            2 -> {
-                etActiveOn(inputMethodManager, third_subject, 2)
-                flag = 3
-            }
-            3 -> {
-                etActiveOn(inputMethodManager, fourth_subject, 3)
-                flag = 4
-            }
-            4 -> {
-                etActiveOn(inputMethodManager, fifth_subject, 5)
-                flag = 5
-            }
-            5 -> {
-                etActiveOn(inputMethodManager, six_subject, 6)
-                flag = 6
-            }
-            6 -> {
-                etActiveOn(inputMethodManager, seventh_subject, 7)
-            }
-        }
-    }
-
-    private fun etActiveOn(inputMethodManager: InputMethodManager, et: EditText, flag: Int) {
-        et.visibility = View.VISIBLE
-        et.requestFocus()
-        inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, flag)
     }
 }

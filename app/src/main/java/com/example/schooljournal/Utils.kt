@@ -1,6 +1,6 @@
 package com.example.schooljournal
 
-import com.example.schooljournal.WeekDayView.WeekDaysFragment
+import com.example.schooljournal.weekDayView.WeekDaysFragment
 
 val dayFragments = listOf(
     WeekDaysFragment.newInstance("Понедельник"),
@@ -11,3 +11,5 @@ val dayFragments = listOf(
     WeekDaysFragment.newInstance("Суббота"),
     WeekDaysFragment.newInstance("Воскресенье")
 )
+
+const val DAY_NAME = "DAY_NAME"
