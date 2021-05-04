@@ -12,14 +12,23 @@ import androidx.fragment.app.Fragment
 import com.example.schooljournal.*
 import com.example.schooljournal.data.DayDao
 import com.example.schooljournal.data.DayDatabase
+import com.example.schooljournal.data.Subject
 import com.example.schooljournal.databinding.FragmentWeekDaysBinding
 import kotlinx.android.synthetic.main.fragment_week_days.*
 import kotlinx.android.synthetic.main.fragment_week_days.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class WeekDaysFragment : Fragment() {
 
     private lateinit var viewModel: WeekDayViewModel
-    private lateinit var dayDao: DayDao
+    private val dayDao: DayDao by lazy {
+        activity.let {
+            DayDatabase.getInstance(it!!.application).dayDao()
+        }
+    }
     private lateinit var navigation: Navigation
     private lateinit var binding: FragmentWeekDaysBinding
     private var text: String? = null
@@ -49,25 +58,41 @@ class WeekDaysFragment : Fragment() {
         navigation = requireActivity() as Navigation
         val view = binding.root
         binding.nameOfDay = text
-        dayDao = activity.let {
-            DayDatabase.getInstance(it!!.application).dayDao()
-        }
         viewModel = WeekDayViewModel(dayDao)
         loadSubjects()
         initFab()
-        initNextButton(dayDao)
+        initNextButton()
         return view
     }
 
     private fun loadSubjects() {
-        viewModel.loadSubjects(text.toString(), binding.root.first_subject)
+        GlobalScope.launch(Dispatchers.IO) {
+            viewModel.loadSubjects(text.toString())
+            withContext(Dispatchers.Main) {
+                checkEmpty(binding.root.first_subject, 0)
+                checkEmpty(binding.root.second_subject, 1)
+                checkEmpty(binding.root.third_subject, 2)
+                checkEmpty(binding.root.fourth_subject, 3)
+                checkEmpty(binding.root.fifth_subject, 4)
+                checkEmpty(binding.root.six_subject, 5)
+                checkEmpty(binding.root.seventh_subject, 6)
+            }
+        }
     }
 
-    private fun initNextButton(dayDao: DayDao) {
+    private fun checkEmpty(et: EditText, index: Int) {
+        val sList = viewModel.subjectList
+        if (sList.lastIndex>=index) {
+            et.setText(sList[index].name)
+            et.visibility = View.VISIBLE
+            flag++
+        }
+    }
+
+    private fun initNextButton() {
         val parser = Parser(text.toString())
         binding.root.next_button.setOnClickListener {
             viewModel.insertSubjects(
-                dayDao,
                 parser.parsingName,
                 requireActivity(),
                 requireContext(),
@@ -124,7 +149,9 @@ class WeekDaysFragment : Fragment() {
     }
 
     private fun etActiveOn(inputMethodManager: InputMethodManager, et: EditText, flag: Int) {
-        et.visibility = View.VISIBLE
+        if (et.visibility == View.INVISIBLE) {
+            et.visibility = View.VISIBLE
+        }
         et.requestFocus()
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, flag)
     }

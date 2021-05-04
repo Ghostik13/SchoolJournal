@@ -23,7 +23,6 @@ class WeekDayViewModel(private val dayDao: DayDao) : ViewModel() {
     private val subjects: MutableList<Subject> = mutableListOf()
 
     fun insertSubjects(
-        dayDao: DayDao,
         dayOfWeek: String,
         activity: Activity,
         context: Context,
@@ -68,17 +67,12 @@ class WeekDayViewModel(private val dayDao: DayDao) : ViewModel() {
         }
     }
 
-    fun loadSubjects(day: String, et: EditText) {
-        GlobalScope.launch(Dispatchers.IO) {
-            val subjectList = dayDao
-                .loadSubjectsForCurrentDay(Parser(day).parsingName)
-                .subjects
-            withContext(Dispatchers.Main) {
-                if (subjectList.isNotEmpty()) {
-                    et.setText(subjectList[0].name)
-                }
-            }
-        }
+    lateinit var subjectList: List<Subject>
+
+    fun loadSubjects(day: String) {
+        subjectList = dayDao
+            .loadSubjectsForCurrentDay(Parser(day).parsingName)
+            .subjects
     }
 
     fun nextDay(day: String, navigation: Navigation, parser: Parser) {
