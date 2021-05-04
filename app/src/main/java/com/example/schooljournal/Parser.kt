@@ -25,15 +25,15 @@ class Parser(name: String) {
             }
             "Пятница" -> {
                 currentIndex = 5
-                return "чт"
+                return "пт"
             }
             "Суббота" -> {
                 currentIndex = 6
-                return "пт"
+                return "сб"
             }
             "Воскресенье" -> {
                 currentIndex = 0
-                return "сб"
+                return "вс"
             }
         }
         return "null"

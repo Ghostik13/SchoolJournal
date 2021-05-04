@@ -7,13 +7,40 @@ import android.widget.EditText
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.schooljournal.DAY_NAME
-import com.example.schooljournal.Parser
-import com.example.schooljournal.dayFragments
+import com.example.schooljournal.*
+import com.example.schooljournal.data.DayDao
+import kotlinx.android.synthetic.main.fragment_week_days.*
+import kotlinx.android.synthetic.main.fragment_week_days.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class WeekDayViewModel: ViewModel() {
+class WeekDayViewModel(private val dayDao: DayDao): ViewModel() {
 
     private var flag = 0
+
+    fun loadSubjects(day: String, et: EditText) {
+        GlobalScope.launch(Dispatchers.IO) {
+            val subjectList = dayDao
+                .loadSubjectsForCurrentDay(Parser(day).parsingName)
+                .subjects
+            withContext(Dispatchers.Main) {
+                if (subjectList.isNotEmpty()) {
+                    et.setText(subjectList[0].name)
+                }
+            }
+        }
+    }
+
+    fun nextDay(day: String, navigation: Navigation){
+        val parser = Parser(day)
+        if (day == "Суббота") {
+            navigation.initSchedule(ScheduleCreateFragment())
+        } else {
+            navigation.initSchedule(dayFragments[parser.currentIndex])
+        }
+    }
 
     fun addSubjectField(
         context: Context,

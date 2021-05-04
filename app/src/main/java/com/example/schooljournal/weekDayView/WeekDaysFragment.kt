@@ -55,37 +55,26 @@ class WeekDaysFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_week_days, container, false)
         val view = binding.root
-        viewModel = ViewModelProvider(this).get(WeekDayViewModel::class.java)
         binding.nameOfDay = text
         dayDao = activity.let {
             DayDatabase.getInstance(it!!.application).dayDao()
         }
+        viewModel = WeekDayViewModel(dayDao)
+        viewModel.loadSubjects(text.toString(), binding.root.first_subject)
         initFab(view)
         initNextButton(dayDao)
-        loadSubjects()
         return view
     }
 
-    private fun loadSubjects() {
-        GlobalScope.launch(Dispatchers.IO) {
-            val subjectList = dayDao
-                .loadSubjectsForCurrentDay(Parser(text.toString()).parsingName)
-                .subjects
-            withContext(Dispatchers.Main) {
-                if (subjectList.isNotEmpty()) {
-                    binding.root.first_subject.setText(subjectList[0].name)
-                }
-            }
-        }
-    }
-
-
     private fun initNextButton(dayDao: DayDao) {
         binding.root.next_button.setOnClickListener {
-            insertSubjects(binding.root, dayDao, Parser(dow_tv.text.toString()).parsingName)
-            if (dow_tv.text.toString() == "Воскресенье") {
+            val parser = Parser(text.toString())
+            insertSubjects(binding.root, dayDao, parser.parsingName)
+            if (dow_tv.text.toString() == "Суббота") {
                 (requireActivity() as Navigation).initSchedule(ScheduleCreateFragment())
-            } else (requireActivity() as Navigation).initSchedule(dayFragments[Parser("").currentIndex])
+            } else {
+                (requireActivity() as Navigation).initSchedule(dayFragments[parser.currentIndex])
+            }
         }
     }
 
