@@ -1,5 +1,7 @@
 package com.example.schooljournal
 
+import android.content.Context
+import android.widget.Toast
 import com.example.schooljournal.weekDayView.WeekDaysFragment
 
 val dayFragments = listOf(
@@ -13,3 +15,7 @@ val dayFragments = listOf(
 )
 
 const val DAY_NAME = "DAY_NAME"
+
+fun Context.toast(context: Context, message: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(context, message, duration).show()
+}
