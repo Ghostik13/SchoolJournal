@@ -8,20 +8,14 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.Observable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.schooljournal.*
 import com.example.schooljournal.data.DayDao
 import com.example.schooljournal.data.DayDatabase
-import com.example.schooljournal.data.Subject
 import com.example.schooljournal.databinding.FragmentWeekDaysBinding
 import kotlinx.android.synthetic.main.fragment_week_days.*
 import kotlinx.android.synthetic.main.fragment_week_days.view.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class WeekDaysFragment : Fragment() {
 

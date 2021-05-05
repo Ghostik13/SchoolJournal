@@ -2,9 +2,6 @@ package com.example.schooljournal.weekDayView
 
 import android.app.Activity
 import android.content.Context
-import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
