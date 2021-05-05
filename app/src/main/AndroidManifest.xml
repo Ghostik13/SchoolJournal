@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SchoolJournal">
-        <activity android:name=".NavigationActivity"></activity>
+        <activity android:name=".NavigationActivity">
+
+        </activity>
         <activity
             android:name=".MainActivity"
             android:windowSoftInputMode="adjustResize">

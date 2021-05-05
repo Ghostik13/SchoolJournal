@@ -20,18 +20,18 @@ class InitialViewModel : ViewModel() {
     private fun convertDate(): String? {
         var monthString: String? = null
         when (Calendar.getInstance().get(Calendar.MONTH)) {
-            1 -> monthString = "января"
-            2 -> monthString = "февраля"
-            3 -> monthString = "марта"
-            4 -> monthString = "апреля"
-            5 -> monthString = "мая"
-            6 -> monthString = "июня"
-            7 -> monthString = "июля"
-            8 -> monthString = "августа"
-            9 -> monthString = "сентября"
-            10 -> monthString = "октября"
-            11 -> monthString = "ноября"
-            12 -> monthString = "декабря"
+            0 -> monthString = "января"
+            1 -> monthString = "февраля"
+            2 -> monthString = "марта"
+            3 -> monthString = "апреля"
+            4 -> monthString = "мая"
+            5 -> monthString = "июня"
+            6 -> monthString = "июля"
+            7 -> monthString = "августа"
+            8 -> monthString = "сентября"
+            9 -> monthString = "октября"
+            10 -> monthString = "ноября"
+            11 -> monthString = "декабря"
         }
         return monthString
     }

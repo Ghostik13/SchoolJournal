@@ -35,11 +35,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="530dp"
+        android:background="@drawable/back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/back">
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/textView2"
@@ -47,10 +47,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="64dp"
-            android:textColor="@color/white"
-            android:textSize="40sp"
             android:fontFamily="@font/myriad_regular"
             android:text="Составьте"
+            android:textColor="@color/white"
+            android:textSize="40sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -97,9 +97,9 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="48dp"
             android:fontFamily="@font/myriad_regular"
+            android:text="Сегодня 16 апреля"
             android:textColor="@color/white"
             android:textSize="32sp"
-            android:text="Сегодня 16 апреля"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
