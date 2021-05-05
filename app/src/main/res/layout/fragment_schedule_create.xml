@@ -115,7 +115,7 @@
             app:layout_constraintTop_toBottomOf="@+id/th_btn" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button9"
+            android:id="@+id/ready_btn"
             style="@style/ready_button"
             android:layout_width="0dp"
             android:layout_marginTop="24dp"
