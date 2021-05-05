@@ -13,4 +13,5 @@
     <string name="sat">Сб</string>
     <string name="sun">Вс</string>
     <string name="ready">Готово</string>
+    <string name="intro_text">Приветствуем Вас в приложении Дневник. Чтобы начать пользоваться Дневником составьте расписание учебных предметов.</string>
 </resources>

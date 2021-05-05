@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity(), Navigation {
     }
 
     private fun initFragment() {
-        replaceFragment(ScheduleCreateFragment())
+        replaceFragment(IntroFragment())
     }
 
     private fun replaceFragment(fragment: Fragment) {
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(), Navigation {
     }
 
     override fun onBackPressed() {
-        initFragment()
+        replaceFragment(ScheduleCreateFragment())
     }
 
     override fun initPrevious() {
