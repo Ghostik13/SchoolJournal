@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.Observable
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.example.schooljournal.*
 import com.example.schooljournal.data.DayDao
 import com.example.schooljournal.data.DayDatabase
@@ -66,27 +68,25 @@ class WeekDaysFragment : Fragment() {
     }
 
     private fun loadSubjects() {
-        GlobalScope.launch(Dispatchers.IO) {
-            viewModel.loadSubjects(text.toString())
-            withContext(Dispatchers.Main) {
-                checkEmpty(binding.root.first_subject, 0)
-                checkEmpty(binding.root.second_subject, 1)
-                checkEmpty(binding.root.third_subject, 2)
-                checkEmpty(binding.root.fourth_subject, 3)
-                checkEmpty(binding.root.fifth_subject, 4)
-                checkEmpty(binding.root.six_subject, 5)
-                checkEmpty(binding.root.seventh_subject, 6)
-            }
-        }
+        viewModel.loadSubjects(text.toString())
+        checkEmpty(binding.root.first_subject, 0)
+        checkEmpty(binding.root.second_subject, 1)
+        checkEmpty(binding.root.third_subject, 2)
+        checkEmpty(binding.root.fourth_subject, 3)
+        checkEmpty(binding.root.fifth_subject, 4)
+        checkEmpty(binding.root.six_subject, 5)
+        checkEmpty(binding.root.seventh_subject, 6)
     }
 
     private fun checkEmpty(et: EditText, index: Int) {
         val sList = viewModel.subjectList
-        if (sList.lastIndex>=index) {
-            et.setText(sList[index].name)
-            et.visibility = View.VISIBLE
-            flag++
-        }
+        sList.observe(viewLifecycleOwner, Observer {
+            if (it.lastIndex >= index) {
+                et.setText(it[index].name)
+                et.visibility = View.VISIBLE
+                flag++
+            }
+        })
     }
 
     private fun initNextButton() {

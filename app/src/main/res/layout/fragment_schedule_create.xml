@@ -9,10 +9,10 @@
             type="com.example.schooljournal.Navigation" />
         <variable
             name="viewModel"
-            type="com.example.schooljournal.ScheduleCreateViewModel" />
+            type="com.example.schooljournal.scheduleCreateView.ScheduleCreateViewModel" />
         <variable
             name="navigation"
-            type="com.example.schooljournal.ScheduleCreateFragment" />
+            type="com.example.schooljournal.scheduleCreateView.ScheduleCreateFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,6 +1,8 @@
-package com.example.schooljournal
+package com.example.schooljournal.scheduleCreateView
 
 import androidx.lifecycle.ViewModel
+import com.example.schooljournal.Navigation
+import com.example.schooljournal.dayFragments
 
 class ScheduleCreateViewModel : ViewModel() {
 

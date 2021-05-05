@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import com.example.schooljournal.data.Day
 import com.example.schooljournal.data.DayDatabase
 import com.example.schooljournal.data.Subject
+import com.example.schooljournal.scheduleCreateView.ScheduleCreateFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

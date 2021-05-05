@@ -1,4 +1,4 @@
-package com.example.schooljournal
+package com.example.schooljournal.scheduleCreateView
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,9 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
-import androidx.navigation.fragment.findNavController
-import com.example.schooljournal.data.DayDatabase
+import com.example.schooljournal.Navigation
+import com.example.schooljournal.R
 import com.example.schooljournal.databinding.FragmentScheduleCreateBinding
 import kotlinx.android.synthetic.main.fragment_schedule_create.view.*
 
@@ -23,7 +22,8 @@ class ScheduleCreateFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_schedule_create, container, false)
+        binding = DataBindingUtil.inflate(inflater,
+            R.layout.fragment_schedule_create, container, false)
         viewModel = ViewModelProvider(this).get(ScheduleCreateViewModel::class.java)
         val view = binding.root
         nav = activity as Navigation
