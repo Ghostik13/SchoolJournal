@@ -1,26 +1,25 @@
 package com.example.schooljournal
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.example.schooljournal.data.Day
-import com.example.schooljournal.data.DayDatabase
-import com.example.schooljournal.data.Subject
 import com.example.schooljournal.scheduleCreateView.ScheduleCreateFragment
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), Navigation {
-
-    private lateinit var days: List<Day>
-    private lateinit var subjects: List<Subject>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        getDb()
-        initFragment()
+        if(firstRunFinished()) {
+            startActivity(Intent(this, NavigationActivity::class.java))
+        } else initFragment()
+    }
+
+    private fun firstRunFinished(): Boolean {
+        val sharedPreferences = getSharedPreferences("firstRun", Context.MODE_PRIVATE)
+        return sharedPreferences.getBoolean("Done", false)
     }
 
     private fun initFragment() {
@@ -33,20 +32,8 @@ class MainActivity : AppCompatActivity(), Navigation {
         transaction.commit()
     }
 
-    private fun getDb() {
-        val taskDao = DayDatabase.getInstance(application).dayDao()
-        GlobalScope.launch(Dispatchers.IO) {
-            days = taskDao.getDays()
-            subjects = taskDao.getSubjects()
-        }
-    }
-
     override fun initSchedule(fragment: Fragment) {
         replaceFragment(fragment)
-    }
-
-    override fun onBackPressed() {
-        replaceFragment(ScheduleCreateFragment())
     }
 
     override fun initPrevious() {

@@ -3,29 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/mainPageFragment">
+    app:startDestination="@id/viewPagerFragment">
 
-    <fragment
-        android:id="@+id/mainPageFragment"
-        android:name="com.example.schooljournal.MainPageFragment"
-        android:label="fragment_main_page"
-        tools:layout="@layout/fragment_main_page" >
-        <action
-            android:id="@+id/action_mainPageFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-        <action
-            android:id="@+id/action_mainPageFragment_to_havingRestFragment"
-            app:destination="@id/havingRestFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.schooljournal.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_viewPagerFragment"
+            app:destination="@id/viewPagerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/havingRestFragment"
         android:name="com.example.schooljournal.HavingRestFragment"
         android:label="fragment_having_rest"
-        tools:layout="@layout/fragment_having_rest" />
+        tools:layout="@layout/fragment_having_rest" >
+        <action
+            android:id="@+id/action_havingRestFragment_to_viewPagerFragment"
+            app:destination="@id/viewPagerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewPagerFragment"
+        android:name="com.example.schooljournal.mainPage.ViewPagerFragment"
+        android:label="fragment_view_pager"
+        tools:layout="@layout/fragment_view_pager" >
+        <action
+            android:id="@+id/action_viewPagerFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_viewPagerFragment_to_havingRestFragment"
+            app:destination="@id/havingRestFragment" />
+    </fragment>
 </navigation>

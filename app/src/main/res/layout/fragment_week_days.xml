@@ -5,11 +5,13 @@
 
     <data>
         <variable
-            name="viewModel"
-            type="com.example.schooljournal.weekDayView.WeekDayViewModel" />
-        <variable
             name="nameOfDay"
             type="String" />
+
+        <import type="android.view.View"/>
+        <variable
+            name="subjectName"
+            type="java.lang.Boolean"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,6 +21,7 @@
         tools:context=".WeekDaysFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="@drawable/toolbar_gradient"
@@ -49,9 +52,9 @@
         <EditText
             android:id="@+id/first_subject"
             style="@style/add_subject"
-            android:textIsSelectable="true"
             android:layout_marginTop="120dp"
             android:hint="@string/add_subject"
+            android:saveEnabled="true"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -61,9 +64,9 @@
         <EditText
             android:id="@+id/second_subject"
             style="@style/add_subject"
-            android:textIsSelectable="true"
             android:layout_marginTop="10dp"
             android:hint="@string/add_subject"
+            android:textIsSelectable="true"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -73,9 +76,9 @@
         <EditText
             android:id="@+id/third_subject"
             style="@style/add_subject"
-            android:textIsSelectable="true"
             android:layout_marginTop="10dp"
             android:hint="@string/add_subject"
+            android:textIsSelectable="true"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -85,9 +88,9 @@
         <EditText
             android:id="@+id/fourth_subject"
             style="@style/add_subject"
-            android:textIsSelectable="true"
             android:layout_marginTop="10dp"
             android:hint="@string/add_subject"
+            android:textIsSelectable="true"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -97,9 +100,9 @@
         <EditText
             android:id="@+id/fifth_subject"
             style="@style/add_subject"
-            android:textIsSelectable="true"
             android:layout_marginTop="10dp"
             android:hint="@string/add_subject"
+            android:textIsSelectable="true"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -109,9 +112,9 @@
         <EditText
             android:id="@+id/six_subject"
             style="@style/add_subject"
-            android:textIsSelectable="true"
             android:layout_marginTop="10dp"
             android:hint="@string/add_subject"
+            android:textIsSelectable="true"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -121,14 +124,24 @@
         <EditText
             android:id="@+id/seventh_subject"
             style="@style/add_subject"
-            android:textIsSelectable="true"
             android:layout_marginTop="10dp"
             android:hint="@string/add_subject"
+            android:textIsSelectable="true"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/six_subject" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_back"
+            style="@style/fab"
+            android:scaleType="center"
+            android:src="@drawable/plus"
+            app:backgroundTint="@color/red"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/white" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"

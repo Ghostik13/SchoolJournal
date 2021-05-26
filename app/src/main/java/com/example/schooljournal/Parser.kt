@@ -4,6 +4,7 @@ class Parser(name: String) {
 
     var currentIndex = 0
     val parsingName = parsingName(name)
+    val reverseParsing = reverseParsingName(name)
 
     private fun parsingName(name: String): String {
         when (name) {
@@ -34,6 +35,33 @@ class Parser(name: String) {
             "Воскресенье" -> {
                 currentIndex = 0
                 return "вс"
+            }
+        }
+        return "null"
+    }
+
+    private fun reverseParsingName(name: String): String {
+        when (name) {
+            "пн" -> {
+                return "Понедельник"
+            }
+            "вт" -> {
+                return "Вторник"
+            }
+            "ср" -> {
+                return "Среда"
+            }
+            "чт" -> {
+                return "Четверг"
+            }
+            "пт" -> {
+                return "Пятница"
+            }
+            "сб" -> {
+                return "Суббота"
+            }
+            "вс" -> {
+                return "Воскресенье"
             }
         }
         return "null"

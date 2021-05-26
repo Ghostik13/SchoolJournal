@@ -2,42 +2,31 @@ package com.example.schooljournal.weekDayView
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.activity.OnBackPressedCallback
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.schooljournal.*
-import com.example.schooljournal.data.DayDao
-import com.example.schooljournal.data.DayDatabase
 import com.example.schooljournal.databinding.FragmentWeekDaysBinding
-import kotlinx.android.synthetic.main.fragment_week_days.*
+import com.example.schooljournal.scheduleCreateView.ScheduleCreateFragment
 import kotlinx.android.synthetic.main.fragment_week_days.view.*
 
 class WeekDaysFragment : Fragment() {
 
     private lateinit var viewModel: WeekDayViewModel
-    private val dayDao: DayDao by lazy {
-        activity.let {
-            DayDatabase.getInstance(it!!.application).dayDao()
-        }
-    }
     private lateinit var navigation: Navigation
     private lateinit var binding: FragmentWeekDaysBinding
+    private lateinit var edits: List<EditText>
+    private lateinit var parser: Parser
     private var text: String? = null
-
-    companion object {
-        @JvmStatic
-        fun newInstance(dayName: String) =
-            WeekDaysFragment().apply {
-                arguments = Bundle().apply {
-                    putString(DAY_NAME, dayName)
-                }
-            }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,92 +40,128 @@ class WeekDaysFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_week_days, container, false)
-        navigation = requireActivity() as Navigation
         val view = binding.root
+        viewModel = ViewModelProvider(this).get(WeekDayViewModel::class.java)
+        navigation = requireActivity() as Navigation
+        parser = Parser(text.toString())
         binding.nameOfDay = text
-        viewModel = WeekDayViewModel(dayDao)
-        loadSubjects()
+        initEditList(view)
+        visibilitySet()
         initFab()
         initNextButton()
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                fillOutAllLists(text as String)
+                (requireActivity() as Navigation).initSchedule(ScheduleCreateFragment())
+                Log.d("ARRAY: ", mon.toString())
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
         return view
     }
 
-    private fun loadSubjects() {
-        viewModel.loadSubjects(text.toString())
-        checkEmpty(binding.root.first_subject, 0)
-        checkEmpty(binding.root.second_subject, 1)
-        checkEmpty(binding.root.third_subject, 2)
-        checkEmpty(binding.root.fourth_subject, 3)
-        checkEmpty(binding.root.fifth_subject, 4)
-        checkEmpty(binding.root.six_subject, 5)
-        checkEmpty(binding.root.seventh_subject, 6)
+    private fun initEditList(view: View) {
+        edits = listOf(
+            view.first_subject,
+            view.second_subject,
+            view.third_subject,
+            view.fourth_subject,
+            view.fifth_subject,
+            view.six_subject,
+            view.seventh_subject
+        )
     }
 
-    private fun checkEmpty(et: EditText, index: Int) {
-        val sList = viewModel.subjectList
-        sList.observe(viewLifecycleOwner, Observer {
-            if (it.lastIndex >= index) {
-                et.setText(it[index].name)
-                et.visibility = View.VISIBLE
-                flag++
-            }
-        })
-    }
-
-    private fun initNextButton() {
-        val parser = Parser(text.toString())
-        binding.root.next_button.setOnClickListener {
-            viewModel.insertSubjects(
-                parser.parsingName,
-                requireActivity(),
-                requireContext(),
-                etToString(first_subject),
-                etToString(second_subject),
-                etToString(third_subject),
-                etToString(fourth_subject),
-                etToString(fifth_subject),
-                etToString(six_subject),
-                etToString(seventh_subject)
-            )
-            viewModel.nextDay(text.toString(), navigation, parser)
+    private fun addSubjectsToList(list: MutableList<String>) {
+        for (i in list.indices) {
+            list[i] = edits[i].text.toString()
         }
     }
 
-    private fun etToString(et: EditText) = et.text.toString()
+    private fun initNextButton() {
+        binding.root.next_button.setOnClickListener {
+            fillOutAllLists(parser.parsingName)
+            if (parser.parsingName == "сб") {
+                (requireActivity() as Navigation).initSchedule(ScheduleCreateFragment())
+            } else {
+                (requireActivity() as Navigation).initSchedule(dayFragments[parser.currentIndex])
+            }
+        }
+    }
+
+    private fun fillOutAllLists(nameOfDay: String) {
+        when (nameOfDay) {
+            "пн" -> addSubjectsToList(mon)
+            "вт" -> addSubjectsToList(tue)
+            "ср" -> addSubjectsToList(wed)
+            "чт" -> addSubjectsToList(thu)
+            "пт" -> addSubjectsToList(fri)
+            "сб" -> addSubjectsToList(sat)
+            "вс" -> addSubjectsToList(sun)
+        }
+    }
 
     private var flag = 0
 
+    private fun textCheck(day: MutableList<String>) {
+        for (i in edits.indices) {
+            if(day[i].isNotEmpty()) {
+                edits[i].visibility = View.VISIBLE
+            }
+            if(edits[i].isVisible) {
+                flag = i+1
+            }
+        }
+    }
+
+    private fun visibilitySet() {
+        when (parser.parsingName) {
+            "пн" -> textCheck(mon)
+            "вт" -> textCheck(tue)
+            "ср" -> textCheck(wed)
+            "чт" -> textCheck(thu)
+            "пт" -> textCheck(fri)
+            "сб" -> textCheck(sat)
+            "вс" -> textCheck(sun)
+        }
+    }
+
     private fun initFab() {
+        val animForFab = AnimationUtils.loadAnimation(
+            this.context,
+            R.anim.fab_animation
+        )
+        binding.root.fab_back.startAnimation(animForFab)
         binding.root.fab.setOnClickListener {
             val inputMethodManager =
                 requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             when (flag) {
                 0 -> {
-                    etActiveOn(inputMethodManager, first_subject, 0)
+                    etActiveOn(inputMethodManager, edits[0], 0)
                     flag = 1
                 }
                 1 -> {
-                    etActiveOn(inputMethodManager, second_subject, 1)
+                    etActiveOn(inputMethodManager, edits[1], 1)
                     flag = 2
                 }
                 2 -> {
-                    etActiveOn(inputMethodManager, third_subject, 2)
+                    etActiveOn(inputMethodManager, edits[2], 2)
                     flag = 3
                 }
                 3 -> {
-                    etActiveOn(inputMethodManager, fourth_subject, 3)
+                    etActiveOn(inputMethodManager, edits[3], 3)
                     flag = 4
                 }
                 4 -> {
-                    etActiveOn(inputMethodManager, fifth_subject, 5)
+                    etActiveOn(inputMethodManager, edits[4], 5)
                     flag = 5
                 }
                 5 -> {
-                    etActiveOn(inputMethodManager, six_subject, 6)
+                    etActiveOn(inputMethodManager, edits[5], 6)
                     flag = 6
                 }
                 6 -> {
-                    etActiveOn(inputMethodManager, seventh_subject, 7)
+                    etActiveOn(inputMethodManager, edits[6], 7)
                 }
             }
         }
@@ -148,5 +173,15 @@ class WeekDaysFragment : Fragment() {
         }
         et.requestFocus()
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, flag)
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance(dayName: String) =
+            WeekDaysFragment().apply {
+                arguments = Bundle().apply {
+                    putString(DAY_NAME, dayName)
+                }
+            }
     }
 }

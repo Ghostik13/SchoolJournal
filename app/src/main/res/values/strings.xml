@@ -14,4 +14,7 @@
     <string name="sun">Вс</string>
     <string name="ready">Готово</string>
     <string name="intro_text">Приветствуем Вас в приложении Дневник. Чтобы начать пользоваться Дневником составьте расписание учебных предметов.</string>
+    <string name="schedule">РАСПИСАНИЕ</string>
+    <string name="rightnow">Прямо сейчас</string>
+    <string name="create">Составьте</string>
 </resources>

@@ -1,30 +1,40 @@
 package com.example.schooljournal.scheduleCreateView
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.*
 import com.example.schooljournal.Navigation
+import com.example.schooljournal.data.Day
+import com.example.schooljournal.data.DayDatabase
+import com.example.schooljournal.data.Subject
+import com.example.schooljournal.data.SubjectRepositoryImpl
 import com.example.schooljournal.dayFragments
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class ScheduleCreateViewModel : ViewModel() {
+class ScheduleCreateViewModel(application: Application) : AndroidViewModel(application) {
 
-    fun initMonday(navigation: Navigation) {
-        navigation.initSchedule(dayFragments[0])
+
+    private val repository: SubjectRepositoryImpl
+    init {
+        val dao = DayDatabase.getInstance(application).dayDao()
+        repository = SubjectRepositoryImpl(dao)
     }
-    fun initTuesday(navigation: Navigation) {
-        navigation.initSchedule(dayFragments[1])
+
+    fun insertDays(days: MutableList<Day>) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.insertDays(days)
+        }
     }
-    fun initWednesday(navigation: Navigation) {
-        navigation.initSchedule(dayFragments[2])
+
+    fun insertSubjects(subjects: MutableList<Subject>) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.insertSubjects(subjects)
+        }
     }
-    fun initThursday(navigation: Navigation) {
-        navigation.initSchedule(dayFragments[3])
-    }
-    fun initFriday(navigation: Navigation) {
-        navigation.initSchedule(dayFragments[4])
-    }
-    fun initSaturday(navigation: Navigation) {
-        navigation.initSchedule(dayFragments[5])
-    }
-    fun initSunday(navigation: Navigation) {
-        navigation.initSchedule(dayFragments[6])
+
+    fun updateSubjects(subjects: List<Subject>, day: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateSubjects(subjects, day)
+        }
     }
 }

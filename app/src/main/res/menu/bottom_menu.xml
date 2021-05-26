@@ -6,11 +6,11 @@
         android:icon="@drawable/ic_settings"
         android:title="Settings" />
     <item
-        android:id="@+id/mainPageFragment"
+        android:id="@+id/viewPagerFragment"
         android:icon="@drawable/ic_journal"
         android:title="Main" />
     <item
         android:id="@+id/havingRestFragment"
-        android:icon="@drawable/ic_fun"
+        android:icon="@drawable/ic_smile"
         android:title="Rest" />
 </menu>

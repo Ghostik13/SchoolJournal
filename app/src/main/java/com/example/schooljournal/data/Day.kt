@@ -17,19 +17,11 @@ data class Day(
 data class Subject(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val dayId: Int,
     val name: String,
     val teacher: String,
     val mark: String,
-    val homework: String
-)
-
-@Entity(tableName = "week_table")
-data class Week(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int,
-    val day: List<Day>,
-    val note: Note
+    val homework: String,
+    val dayOfWeek: String
 )
 
 @Entity(tableName = "week_table")
@@ -40,7 +32,7 @@ data class Note(
     val note: String
 )
 
-data class Sub(
-    @ColumnInfo(name = "subjects")
-    val subjects: List<Subject>
-)
+//data class Sub(
+//    @ColumnInfo(name = "subjects")
+//    val subjects: List<Subject>
+//)
