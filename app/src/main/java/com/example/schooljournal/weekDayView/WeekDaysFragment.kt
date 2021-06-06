@@ -2,7 +2,6 @@ package com.example.schooljournal.weekDayView
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,8 +51,7 @@ class WeekDaysFragment : Fragment() {
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 fillOutAllLists(text as String)
-                (requireActivity() as Navigation).initSchedule(ScheduleCreateFragment())
-                Log.d("ARRAY: ", mon.toString())
+                (requireActivity() as Navigation).initNavigation(ScheduleCreateFragment())
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
@@ -82,9 +80,9 @@ class WeekDaysFragment : Fragment() {
         binding.root.next_button.setOnClickListener {
             fillOutAllLists(parser.parsingName)
             if (parser.parsingName == "сб") {
-                (requireActivity() as Navigation).initSchedule(ScheduleCreateFragment())
+                (requireActivity() as Navigation).initNavigation(ScheduleCreateFragment())
             } else {
-                (requireActivity() as Navigation).initSchedule(dayFragments[parser.currentIndex])
+                (requireActivity() as Navigation).initNavigation(dayFragments[parser.currentIndex])
             }
         }
     }

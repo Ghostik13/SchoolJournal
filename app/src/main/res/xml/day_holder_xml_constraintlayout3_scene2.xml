@@ -36,7 +36,17 @@
           android:layout_marginEnd="24dp"
           motion:layout_constraintEnd_toEndOf="parent"
           motion:layout_constraintTop_toTopOf="parent"
-          android:rotation="180" />
+          android:rotation="90" />
+        <Constraint
+            android:id="@+id/share_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:srcCompat="@drawable/ic_send"
+            android:visibility="gone"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/recycler_subjects"/>
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
@@ -48,6 +58,7 @@
             android:layout_marginEnd="8dp"
             android:visibility="visible"
             android:layout_marginTop="64dp"
+            android:paddingBottom="8dp"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintBottom_toBottomOf="parent"
@@ -62,6 +73,16 @@
             android:layout_marginEnd="24dp"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintTop_toTopOf="parent"
-            android:rotation="90"/>
+            android:rotation="270"/>
+        <Constraint
+            android:id="@+id/share_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:srcCompat="@drawable/ic_send"
+            android:visibility="visible"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/recycler_subjects"/>
     </ConstraintSet>
 </MotionScene>

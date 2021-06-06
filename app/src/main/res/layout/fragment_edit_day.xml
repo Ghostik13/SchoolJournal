@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_gray"
+    android:fitsSystemWindows="true"
+    tools:context=".settings.EditDayFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/toolbar_gradient"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/dow_tv"
+            style="@style/tv_dow"
+            android:text=""
+            android:textIsSelectable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/next_button"
+            style="@style/next_iv"
+            android:src="@drawable/ic_next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <EditText
+        android:id="@+id/first_subject_edit"
+        style="@style/add_subject"
+        android:layout_marginTop="120dp"
+        android:hint="@string/add_subject"
+        android:saveEnabled="true"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/second_subject_edit"
+        style="@style/add_subject"
+        android:layout_marginTop="10dp"
+        android:hint="@string/add_subject"
+        android:textIsSelectable="true"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/first_subject_edit" />
+
+    <EditText
+        android:id="@+id/third_subject_edit"
+        style="@style/add_subject"
+        android:layout_marginTop="10dp"
+        android:hint="@string/add_subject"
+        android:textIsSelectable="true"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/second_subject_edit" />
+
+    <EditText
+        android:id="@+id/fourth_subject_edit"
+        style="@style/add_subject"
+        android:layout_marginTop="10dp"
+        android:hint="@string/add_subject"
+        android:textIsSelectable="true"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/third_subject_edit" />
+
+    <EditText
+        android:id="@+id/fifth_subject_edit"
+        style="@style/add_subject"
+        android:layout_marginTop="10dp"
+        android:hint="@string/add_subject"
+        android:textIsSelectable="true"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fourth_subject_edit" />
+
+    <EditText
+        android:id="@+id/six_subject_edit"
+        style="@style/add_subject"
+        android:layout_marginTop="10dp"
+        android:hint="@string/add_subject"
+        android:textIsSelectable="true"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fifth_subject_edit" />
+
+    <EditText
+        android:id="@+id/seventh_subject_edit"
+        style="@style/add_subject"
+        android:layout_marginTop="10dp"
+        android:hint="@string/add_subject"
+        android:textIsSelectable="true"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/six_subject_edit" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_back"
+        style="@style/fab"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="64dp"
+        android:scaleType="center"
+        android:src="@drawable/plus"
+        app:backgroundTint="@color/red"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/white" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_edit"
+        style="@style/fab"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="64dp"
+        android:scaleType="center"
+        android:src="@drawable/plus"
+        app:backgroundTint="@color/red"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/white" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

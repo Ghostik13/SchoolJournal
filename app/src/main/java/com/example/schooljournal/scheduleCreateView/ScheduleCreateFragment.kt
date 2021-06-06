@@ -14,7 +14,6 @@ import com.example.schooljournal.*
 import com.example.schooljournal.data.Day
 import com.example.schooljournal.data.Subject
 import com.example.schooljournal.databinding.FragmentScheduleCreateBinding
-import com.example.schooljournal.mainPage.MainPageFragment
 import kotlinx.android.synthetic.main.fragment_schedule_create.view.*
 import java.util.*
 
@@ -37,7 +36,6 @@ class ScheduleCreateFragment : Fragment() {
         nav = activity as Navigation
         initDayButtons(view)
         initReadyButton(view)
-        firstRunFinished()
         return view
     }
 
@@ -47,17 +45,17 @@ class ScheduleCreateFragment : Fragment() {
 
     private fun initReadyButton(view: View) {
         view.ready_btn.setOnClickListener {
-            fragments = createFragments()
+            firstRunFinished()
             insertDates()
             insertDays()
             insertData(allData)
-            insertSubjects(mon, "пн")
-            insertSubjects(tue, "вт")
-            insertSubjects(wed, "ср")
-            insertSubjects(thu, "чт")
-            insertSubjects(fri, "пт")
-            insertSubjects(sat, "сб")
-            insertSubjects(sun, "вс")
+            viewModel.insertSubjects("пн", mon)
+            viewModel.insertSubjects("вт", tue)
+            viewModel.insertSubjects("ср", wed)
+            viewModel.insertSubjects("чт", thu)
+            viewModel.insertSubjects("пт", fri)
+            viewModel.insertSubjects("сб", sat)
+            viewModel.insertSubjects("вс", sun)
             val intent = Intent(requireContext(), NavigationActivity::class.java)
             startActivity(intent)
         }
@@ -73,25 +71,25 @@ class ScheduleCreateFragment : Fragment() {
 
     private fun initDayButtons(view: View) {
         view.mo_btn.setOnClickListener {
-            nav.initSchedule(dayFragments[0])
+            nav.initNavigation(dayFragments[0])
         }
         view.tu_btn.setOnClickListener {
-            nav.initSchedule(dayFragments[1])
+            nav.initNavigation(dayFragments[1])
         }
         view.we_btn.setOnClickListener {
-            nav.initSchedule(dayFragments[2])
+            nav.initNavigation(dayFragments[2])
         }
         view.th_btn.setOnClickListener {
-            nav.initSchedule(dayFragments[3])
+            nav.initNavigation(dayFragments[3])
         }
         view.fr_btn.setOnClickListener {
-            nav.initSchedule(dayFragments[4])
+            nav.initNavigation(dayFragments[4])
         }
         view.sa_btn.setOnClickListener {
-            nav.initSchedule(dayFragments[5])
+            nav.initNavigation(dayFragments[5])
         }
         view.su_btn.setOnClickListener {
-            nav.initSchedule(dayFragments[6])
+            nav.initNavigation(dayFragments[6])
         }
     }
 
@@ -130,26 +128,5 @@ class ScheduleCreateFragment : Fragment() {
                 Day(0, week, dayDate, dayName, subjects)
             allData.add(day)
         }
-    }
-
-    private fun insertSubjects(subjectList: MutableList<String>, name: String) {
-        val subjects = mutableListOf<Subject>()
-        subjectList.forEach {
-            if (it.isNotEmpty()) {
-                val subject =
-                    Subject(0, it, "", "", "", name)
-                subjects.add(subject)
-            }
-        }
-        viewModel.insertSubjects(subjects)
-        viewModel.updateSubjects(subjects, name)
-    }
-
-    private fun createFragments(): ArrayList<Fragment> {
-        val fragments = arrayListOf<Fragment>()
-        for (i in 1..52) {
-            fragments.add(MainPageFragment.newInstance(i))
-        }
-        return fragments
     }
 }

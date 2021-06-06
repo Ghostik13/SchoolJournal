@@ -1,24 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@android:color/transparent"
     android:layout_height="match_parent"
-    tools:context="com.example.schooljournal.mainPage.MainPageFragment"
+    tools:context="com.example.schooljournal.mainPage.MainPageFragment">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/light_gray">
+
+    <FrameLayout
+        android:id="@+id/new_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/fab">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="24dp"/>
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="20dp"/>
+
+    </FrameLayout>
 
     <ImageView
         android:id="@+id/previous_week"
         android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginBottom="56dp"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@id/new_container"
+        android:layout_alignBottom="@id/fab"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="false"
+        android:layout_marginStart="64dp"
+        android:layout_marginBottom="48dp"
         android:rotation="180"
         android:src="@drawable/ic_next"
         android:tint="#FF6D00"
@@ -28,12 +47,29 @@
     <ImageView
         android:id="@+id/next_week"
         android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="56dp"
+        android:layout_height="40dp"
+        android:layout_alignRight="@id/new_container"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="48dp"
         android:src="@drawable/ic_next"
         android:tint="#FF6D00"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="48dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:tint="#F67C1E"
+        android:backgroundTint="#FFFFFF"
+        app:backgroundTint="@color/white"
+        android:src="@drawable/ic_note" />
+
+</RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

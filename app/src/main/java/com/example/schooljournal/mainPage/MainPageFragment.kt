@@ -1,25 +1,27 @@
 package com.example.schooljournal.mainPage
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.schooljournal.*
+import com.example.schooljournal.data.Subject
 import kotlinx.android.synthetic.main.fragment_main_page.view.*
-import kotlinx.android.synthetic.main.fragment_view_pager.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainPageFragment : Fragment() {
 
-    private var weekId: Int = 1
+    var weekId: Int = 1
 
     private lateinit var viewModel: MainPageViewModel
     private lateinit var recyclerViewDays: RecyclerView
@@ -40,9 +42,19 @@ class MainPageFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_main_page, container, false)
         viewModel = ViewModelProvider(this).get(MainPageViewModel::class.java)
         initRecyclerView(view)
-        showSubjects()
         changeWeeks(view)
+        initAddNoteFab(view)
         return view
+    }
+
+    private fun initAddNoteFab(view: View) {
+        view.fab.setOnClickListener {
+            val dialogFragment = NoteDialogFragment()
+            val bundle = Bundle()
+            bundle.putInt("weekId", weekId)
+            dialogFragment.arguments = bundle
+            dialogFragment.show(parentFragmentManager, "Note Dialog")
+        }
     }
 
     private fun changeWeeks(view: View) {
@@ -52,41 +64,20 @@ class MainPageFragment : Fragment() {
         }
         view.previous_week.setOnClickListener {
             if (weekId > 1) {
-                viewPager?.currentItem = weekId-2
+                viewPager?.currentItem = weekId - 2
             }
         }
     }
 
     private fun initRecyclerView(view: View) {
+        val dayAdapter = DayAdapter(requireContext(), viewModel)
         recyclerViewDays = view.recycler_view
-        val dayAdapter = DayAdapter(requireContext())
         recyclerViewDays.adapter = dayAdapter
         recyclerViewDays.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         viewModel.getDays(weekId)
         viewModel.days.observe(viewLifecycleOwner, Observer { days ->
             dayAdapter.setData(days)
-        })
-    }
-
-    private fun showSubjects() {
-        viewModel.subjectsMon.observe(viewLifecycleOwner, Observer { subjects ->
-            liveSubjectsMon = subjects
-        })
-        viewModel.subjectsTue.observe(viewLifecycleOwner, Observer { subjects ->
-            liveSubjectsTue = subjects
-        })
-        viewModel.subjectsWed.observe(viewLifecycleOwner, Observer { subjects ->
-            liveSubjectsWed = subjects
-        })
-        viewModel.subjectsThu.observe(viewLifecycleOwner, Observer { subjects ->
-            liveSubjectsThu = subjects
-        })
-        viewModel.subjectsFri.observe(viewLifecycleOwner, Observer { subjects ->
-            liveSubjectsFri = subjects
-        })
-        viewModel.subjectsSat.observe(viewLifecycleOwner, Observer { subjects ->
-            liveSubjectsSat = subjects
         })
     }
 

@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity(), Navigation {
         transaction.commit()
     }
 
-    override fun initSchedule(fragment: Fragment) {
+    override fun initNavigation(fragment: Fragment) {
         replaceFragment(fragment)
     }
 

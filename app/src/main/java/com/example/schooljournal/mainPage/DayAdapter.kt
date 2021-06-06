@@ -1,6 +1,7 @@
 package com.example.schooljournal.mainPage
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.schooljournal.*
 import com.example.schooljournal.data.Day
 import kotlinx.android.synthetic.main.day_holder.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class DayAdapter(private val context: Context) : RecyclerView.Adapter<DayAdapter.DayViewHolder>() {
+class DayAdapter(private val context: Context, private val vm: MainPageViewModel) :
+    RecyclerView.Adapter<DayAdapter.DayViewHolder>() {
 
     class DayViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
@@ -37,17 +43,21 @@ class DayAdapter(private val context: Context) : RecyclerView.Adapter<DayAdapter
         holder.itemView.day_tv.text = parser.reverseParsing + ","
         holder.itemView.date_tv.text = "$day $monthString"
         recyclerView = holder.itemView.recycler_subjects
-        val subjectAdapter = SubjectAdapter()
-        when (currentDay.dayOfTheWeek) {
-            "пн" -> subjectAdapter.setData(liveSubjectsMon)
-            "вт" -> subjectAdapter.setData(liveSubjectsTue)
-            "ср" -> subjectAdapter.setData(liveSubjectsWed)
-            "чт" -> subjectAdapter.setData(liveSubjectsThu)
-            "пт" -> subjectAdapter.setData(liveSubjectsFri)
-            "сб" -> subjectAdapter.setData(liveSubjectsSat)
+        val subjectAdapter = SubjectAdapter(
+            vm,
+            { subject ->
+                    vm.updateHomework(subject)
+            }, context
+        )
+        GlobalScope.launch(Dispatchers.IO) {
+            val subjects = vm.getCurrentSubjects(currentDay.id)
+            withContext(Dispatchers.Main) {
+                subjectAdapter.setData(subjects)
+            }
         }
         recyclerView.adapter = subjectAdapter
-        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     }
 
     override fun getItemCount(): Int {

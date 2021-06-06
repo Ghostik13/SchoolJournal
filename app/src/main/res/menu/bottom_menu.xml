@@ -3,14 +3,14 @@
 
     <item
         android:id="@+id/settingsFragment"
-        android:icon="@drawable/ic_settings"
+        android:icon="@drawable/ic_settings2"
         android:title="Settings" />
     <item
         android:id="@+id/viewPagerFragment"
-        android:icon="@drawable/ic_journal"
+        android:icon="@drawable/ic_book1"
         android:title="Main" />
     <item
         android:id="@+id/havingRestFragment"
-        android:icon="@drawable/ic_smile"
+        android:icon="@drawable/ic_coffee_cup"
         android:title="Rest" />
 </menu>

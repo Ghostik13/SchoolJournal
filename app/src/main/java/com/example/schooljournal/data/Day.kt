@@ -17,14 +17,14 @@ data class Day(
 data class Subject(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
+    val dayId: Int,
     val name: String,
-    val teacher: String,
-    val mark: String,
     val homework: String,
-    val dayOfWeek: String
+    val dayOfWeek: String,
+    val photo: String
 )
 
-@Entity(tableName = "week_table")
+@Entity(tableName = "note_table")
 data class Note(
     @PrimaryKey(autoGenerate = true)
     val id: Int,

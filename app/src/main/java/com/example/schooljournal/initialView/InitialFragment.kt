@@ -25,7 +25,7 @@ class InitialFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_initial, container, false)
         initDate(view)
         view.next_btn.setOnClickListener {
-            (requireActivity() as Navigation).initSchedule(ScheduleCreateFragment())
+            (requireActivity() as Navigation).initNavigation(ScheduleCreateFragment())
         }
         return view
     }

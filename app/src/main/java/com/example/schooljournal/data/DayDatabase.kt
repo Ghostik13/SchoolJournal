@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
-@Database(entities = [Day::class, Subject::class], version = 1)
+@Database(entities = [Day::class, Subject::class, Note::class], version = 1)
 @TypeConverters(ToFromSubjectConverter::class)
 abstract class DayDatabase : RoomDatabase() {
 

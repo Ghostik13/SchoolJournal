@@ -17,4 +17,37 @@
     <string name="schedule">РАСПИСАНИЕ</string>
     <string name="rightnow">Прямо сейчас</string>
     <string name="create">Составьте</string>
+    <string name="my_note">Моя заметка</string>
+    <string name="add">Добавить</string>
+    <string name="connect_to_dev">Связаться с разработчиком</string>
+    <string name="edit_schedule">Изменить расписание</string>
+    <string name="about">О приложении</string>
+    <string name="header_about">О приложении «Дневник»</string>
+    <string name="info">
+        Приложение «Дневник» создано для упрощения жизни учащихся в среднеобразовательных заведениях.
+        Здесь Вы можете создавать расаписание занятий, записывать либо фотографировать домашние задания,
+        а также проводить свободное от занятий время за просмотром увлекательного контента
+        (для этого необходимо наличие интернета на вашем устройстве).\nПожалуйтста, если вам понравилось это приложение, поделитесь им с друзьями!
+    </string>
+    <string name="rights">© 2021 Journal All Rights Reserved</string>
+
+    <string-array name="daysFull">
+        <item>Понедельник</item>
+        <item>Вторник</item>
+        <item>Среда</item>
+        <item>Четверг</item>
+        <item>Пятница</item>
+        <item>Суббота</item>
+        <item>Воскресенье</item>
+    </string-array>
+
+    <string-array name="daysShort">
+        <item>пн</item>
+        <item>вт</item>
+        <item>ср</item>
+        <item>чт</item>
+        <item>пт</item>
+        <item>сб</item>
+        <item>вс</item>
+    </string-array>
 </resources>

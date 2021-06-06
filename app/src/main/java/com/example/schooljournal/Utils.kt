@@ -4,6 +4,7 @@ import android.content.Context
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.schooljournal.data.Subject
+import com.example.schooljournal.settings.EditDayFragment
 import com.example.schooljournal.weekDayView.WeekDaysFragment
 
 val dayFragments = listOf(
@@ -30,12 +31,5 @@ const val WEEK_ID = "WEEK_ID"
 fun Context.toast(context: Context, message: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(context, message, duration).show()
 }
-
-var liveSubjectsMon = emptyList<Subject>()
-var liveSubjectsTue = emptyList<Subject>()
-var liveSubjectsWed = emptyList<Subject>()
-var liveSubjectsThu = emptyList<Subject>()
-var liveSubjectsFri = emptyList<Subject>()
-var liveSubjectsSat = emptyList<Subject>()
 
 var fragments = arrayListOf<Fragment>()

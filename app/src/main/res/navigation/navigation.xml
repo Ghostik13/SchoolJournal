@@ -5,15 +5,25 @@
     android:id="@+id/navigation"
     app:startDestination="@id/viewPagerFragment">
 
-    <fragment
+    <dialog
         android:id="@+id/settingsFragment"
-        android:name="com.example.schooljournal.SettingsFragment"
+        android:name="com.example.schooljournal.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
         <action
             android:id="@+id/action_settingsFragment_to_viewPagerFragment"
-            app:destination="@id/viewPagerFragment" />
-    </fragment>
+            app:destination="@id/viewPagerFragment"
+            app:popUpTo="@id/viewPagerFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_editScheduleFragment"
+            app:destination="@id/editScheduleFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_connectToDevFragment"
+            app:destination="@id/connectToDevFragment" />
+    </dialog>
     <fragment
         android:id="@+id/havingRestFragment"
         android:name="com.example.schooljournal.HavingRestFragment"
@@ -21,7 +31,8 @@
         tools:layout="@layout/fragment_having_rest" >
         <action
             android:id="@+id/action_havingRestFragment_to_viewPagerFragment"
-            app:destination="@id/viewPagerFragment" />
+            app:destination="@id/viewPagerFragment"
+            app:popUpTo="@id/viewPagerFragment" />
     </fragment>
     <fragment
         android:id="@+id/viewPagerFragment"
@@ -34,5 +45,50 @@
         <action
             android:id="@+id/action_viewPagerFragment_to_havingRestFragment"
             app:destination="@id/havingRestFragment" />
+        <action
+            android:id="@+id/action_viewPagerFragment_to_photoDialogFragment"
+            app:destination="@id/photoDialogFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/photoDialogFragment"
+        android:name="com.example.schooljournal.mainPage.PhotoDialogFragment"
+        android:label="PhotoDialogFragment" />
+    <fragment
+        android:id="@+id/editScheduleFragment"
+        android:name="com.example.schooljournal.settings.EditScheduleFragment"
+        android:label="EditScheduleFragment" >
+        <action
+            android:id="@+id/action_editScheduleFragment_to_editDayFragment"
+            app:destination="@id/editDayFragment" />
+        <action
+            android:id="@+id/action_editScheduleFragment_to_viewPagerFragment"
+            app:destination="@id/viewPagerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editDayFragment"
+        android:name="com.example.schooljournal.settings.EditDayFragment"
+        android:label="fragment_edit_day"
+        tools:layout="@layout/fragment_edit_day" >
+        <argument
+            android:name="NameOfDay"
+            app:argType="string"
+            android:defaultValue="Day" />
+        <action
+            android:id="@+id/action_editDayFragment_to_editScheduleFragment"
+            app:popUpTo="@id/editScheduleFragment" />
+        <action
+            android:id="@+id/action_editDayFragment_self"
+            app:destination="@id/editDayFragment"
+            app:popUpTo="@id/editScheduleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.schooljournal.settings.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/connectToDevFragment"
+        android:name="com.example.schooljournal.settings.ConnectToDevFragment"
+        android:label="fragment_connect_to_dev"
+        tools:layout="@layout/fragment_connect_to_dev" />
 </navigation>
