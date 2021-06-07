@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/dialog_bg"
-    tools:context=".mainPage.NoteDialogFragment">
+    tools:context=".presentation.mainPage.NoteDialogFragment">
 
     <Button
         android:id="@+id/submit_button"
@@ -80,7 +80,7 @@
             android:layout_height="32dp"
             android:layout_marginStart="8dp"
             android:src="@drawable/ic_quill"
-            android:tint="#838282"
+            app:tint="#838282"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/my_note_tv"
             app:layout_constraintTop_toTopOf="parent" />

@@ -7,7 +7,7 @@
 
     <dialog
         android:id="@+id/settingsFragment"
-        android:name="com.example.schooljournal.settings.SettingsFragment"
+        android:name="com.example.schooljournal.presentation.settingsView.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
         <action
@@ -26,7 +26,7 @@
     </dialog>
     <fragment
         android:id="@+id/viewPagerFragment"
-        android:name="com.example.schooljournal.mainPage.ViewPagerFragment"
+        android:name="com.example.schooljournal.presentation.mainPage.ViewPagerFragment"
         android:label="fragment_view_pager"
         tools:layout="@layout/fragment_view_pager" >
         <action
@@ -41,11 +41,11 @@
     </fragment>
     <dialog
         android:id="@+id/photoDialogFragment"
-        android:name="com.example.schooljournal.mainPage.PhotoDialogFragment"
+        android:name="com.example.schooljournal.presentation.mainPage.PhotoDialogFragment"
         android:label="PhotoDialogFragment" />
     <fragment
         android:id="@+id/editScheduleFragment"
-        android:name="com.example.schooljournal.settings.EditScheduleFragment"
+        android:name="com.example.schooljournal.presentation.settingsView.scheduleEditView.EditScheduleFragment"
         android:label="EditScheduleFragment" >
         <action
             android:id="@+id/action_editScheduleFragment_to_editDayFragment"
@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/editDayFragment"
-        android:name="com.example.schooljournal.settings.EditDayFragment"
+        android:name="com.example.schooljournal.presentation.settingsView.scheduleEditView.EditDayFragment"
         android:label="fragment_edit_day"
         tools:layout="@layout/fragment_edit_day" >
         <argument
@@ -73,12 +73,12 @@
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="com.example.schooljournal.settings.AboutFragment"
+        android:name="com.example.schooljournal.presentation.settingsView.aboutView.AboutFragment"
         android:label="fragment_about"
         tools:layout="@layout/fragment_about" />
     <fragment
         android:id="@+id/connectToDevFragment"
-        android:name="com.example.schooljournal.settings.ConnectToDevFragment"
+        android:name="com.example.schooljournal.presentation.settingsView.connectView.ConnectToDevFragment"
         android:label="fragment_connect_to_dev"
         tools:layout="@layout/fragment_connect_to_dev" />
     <include app:graph="@navigation/rest_navigation"/>

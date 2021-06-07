@@ -23,14 +23,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SchoolJournal">
-        <activity android:name=".mainPage.PhotoActivity">
-            <intent-filter>
-                <action android:name=".mainPage.PhotoActivity" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".mainPage.CamActivity">
+        <activity android:name="com.example.schooljournal.presentation.mainPage.CamActivity">
             <intent-filter>
                 <action android:name=".mainPage.CamActivity" />
 
@@ -48,7 +42,7 @@
                 android:resource="@xml/fileprovider" />
         </provider>
 
-        <activity android:name=".NavigationActivity"
+        <activity android:name=".presentation.NavigationActivity"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name=".NavigationActivity" />
@@ -56,8 +50,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.MainActivity"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

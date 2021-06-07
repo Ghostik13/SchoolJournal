@@ -20,7 +20,5 @@ interface SubjectRepository {
     suspend fun insertNote(note: Note)
     suspend fun updateNote(note: Note)
     suspend fun getSubjectsForCurrentDay(dayOfWeek: String): List<String>
-    suspend fun getIdsForCurrentSubjectAndDay(dayOfWeek: String, nameOfSubject: String): List<Int>
-    suspend fun getDayIdsForCurrentSubjectAndDay(dayOfWeek: String, nameOfSubject: String): List<Int>
     suspend fun getSubjectsForCurrentDays(dayOfWeek: String, nameOfSubject: String): List<Subject>
 }

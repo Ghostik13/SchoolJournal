@@ -52,12 +52,6 @@ interface DayDao {
     @Query("SELECT DISTINCT name FROM subject_table WHERE dayOfWeek = :dayOfWeek ")
     fun getSubjectsForCurrentDay(dayOfWeek: String): List<String>
 
-    @Query("SELECT id FROM subject_table WHERE dayOfWeek = :dayOfWeek AND name = :nameOfSubject")
-    fun getIdsForCurrentSubjectAndDay(dayOfWeek: String, nameOfSubject: String): List<Int>
-
-    @Query("SELECT dayId FROM subject_table WHERE dayOfWeek = :dayOfWeek AND name = :nameOfSubject")
-    fun getDayIdsForCurrentSubjectAndDay(dayOfWeek: String, nameOfSubject: String): List<Int>
-
     @Query("SELECT * FROM subject_table WHERE dayOfWeek = :dayOfWeek AND name = :nameOfSubject")
     fun getSubjectsForCurrentDays(dayOfWeek: String, nameOfSubject: String): List<Subject>
 

@@ -32,14 +32,17 @@ class GifViewModel(private val repository: GifRepository) : ViewModel() {
             } catch (e: Exception) {
                 _errorMessage.value = R.string.connection
             }
-
         }
     }
 
     fun getGifs(query: String) {
         viewModelScope.launch {
-            val main = repository.loadGifs(query)
-            _gifResponse.value = main
+            try {
+                val main = repository.loadGifs(query)
+                _gifResponse.value = main
+            } catch (e: Exception) {
+                _errorMessage.value = R.string.connection
+            }
         }
     }
 }

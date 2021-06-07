@@ -57,17 +57,6 @@ class SubjectRepositoryImpl(private val dayDao: DayDao) : SubjectRepository {
         return dayDao.getSubjectsForCurrentDay(dayOfWeek)
     }
 
-    override suspend fun getIdsForCurrentSubjectAndDay(
-        dayOfWeek: String,
-        nameOfSubject: String
-    ): List<Int> {
-        return  dayDao.getIdsForCurrentSubjectAndDay(dayOfWeek, nameOfSubject)
-    }
-
-    override suspend fun getDayIdsForCurrentSubjectAndDay(dayOfWeek: String, nameOfSubject: String): List<Int> {
-        return dayDao.getDayIdsForCurrentSubjectAndDay(dayOfWeek, nameOfSubject)
-    }
-
     override suspend fun getSubjectsForCurrentDays(
         dayOfWeek: String,
         nameOfSubject: String

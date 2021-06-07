@@ -3,9 +3,7 @@ package com.example.schooljournal
 import android.content.Context
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.schooljournal.data.Subject
-import com.example.schooljournal.settings.EditDayFragment
-import com.example.schooljournal.weekDayView.WeekDaysFragment
+import com.example.schooljournal.presentation.weekDayView.WeekDaysFragment
 
 val dayFragments = listOf(
     WeekDaysFragment.newInstance("Понедельник"),
@@ -17,13 +15,16 @@ val dayFragments = listOf(
     WeekDaysFragment.newInstance("Воскресенье")
 )
 
-val mon = mutableListOf("",  "", "", "", "", "", "")
-val tue = mutableListOf("",  "", "", "", "", "", "")
-val wed = mutableListOf("",  "", "", "", "", "", "")
-val thu = mutableListOf("",  "", "", "", "", "", "")
-val fri = mutableListOf("",  "", "", "", "", "", "")
-val sat = mutableListOf("",  "", "", "", "", "", "")
-val sun = mutableListOf("",  "", "", "", "", "", "")
+private const val emptySubject = ""
+private const val size = 7
+
+val mon = MutableList(size) {emptySubject}
+val tue = MutableList(size) {emptySubject}
+val wed = MutableList(size) {emptySubject}
+val thu = MutableList(size) {emptySubject}
+val fri = MutableList(size) {emptySubject}
+val sat = MutableList(size) {emptySubject}
+val sun = MutableList(size) {emptySubject}
 
 const val DAY_NAME = "DAY_NAME"
 const val WEEK_ID = "WEEK_ID"

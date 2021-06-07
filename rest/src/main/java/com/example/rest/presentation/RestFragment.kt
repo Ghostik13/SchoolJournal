@@ -1,11 +1,14 @@
 package com.example.rest.presentation
 
 import android.content.Intent
+import android.content.res.AssetManager
+import android.graphics.Typeface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
@@ -36,15 +39,24 @@ class RestFragment : Fragment(), SearchView.OnQueryTextListener {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_rest, container, false)
+        initSearchView(view)
+        observeConnectionException(view)
+        initRecyclerView(view)
+        initTrendGifs(view)
+        return view
+    }
+
+    private fun initRecyclerView(view: View) {
         recyclerView = view.gif_rv
         recyclerView.adapter = adapter
         recyclerView.layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        initTrendGifs(view)
+    }
+
+    private fun initSearchView(view: View) {
         searchView = view.search_view
         searchView.isSubmitButtonEnabled = true
         searchView.setOnQueryTextListener(this)
-        return view
     }
 
     private fun initTrendGifs(view: View) {
@@ -54,6 +66,9 @@ class RestFragment : Fragment(), SearchView.OnQueryTextListener {
                 adapter.setData(it)
             }
         })
+    }
+
+    private fun observeConnectionException(view: View) {
         viewModel.errorMessage.observe(viewLifecycleOwner, Observer {
             view.error_tv.text = getString(it)
         })

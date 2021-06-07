@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:background="@android:color/transparent"
     android:layout_height="match_parent"
-    tools:context="com.example.schooljournal.mainPage.MainPageFragment">
+    tools:context=".presentation.mainPage.MainPageFragment">
 
 <RelativeLayout
     android:layout_width="match_parent"
@@ -40,7 +40,7 @@
         android:layout_marginBottom="48dp"
         android:rotation="180"
         android:src="@drawable/ic_next"
-        android:tint="#FF6D00"
+        app:tint="#FF6D00"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -53,7 +53,7 @@
         android:layout_marginEnd="64dp"
         android:layout_marginBottom="48dp"
         android:src="@drawable/ic_next"
-        android:tint="#FF6D00"
+        app:tint="#FF6D00"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

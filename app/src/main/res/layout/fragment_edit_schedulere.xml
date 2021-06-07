@@ -1,25 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-        <variable
-            name="nav"
-            type="com.example.schooljournal.Navigation" />
-        <variable
-            name="viewModel"
-            type="com.example.schooljournal.scheduleCreateView.ScheduleCreateViewModel" />
-        <variable
-            name="navigation"
-            type="com.example.schooljournal.scheduleCreateView.ScheduleCreateFragment" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/light_gray"
-        tools:context=".WeekDaysFragment">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".presentation.settingsView.scheduleEditView.EditScheduleFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
@@ -133,5 +120,3 @@
             app:layout_constraintGuide_begin="-102dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-</layout>
