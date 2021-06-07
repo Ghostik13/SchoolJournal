@@ -16,6 +16,7 @@
     </queries>
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -23,10 +24,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SchoolJournal">
         <activity android:name=".mainPage.PhotoActivity">
+            <intent-filter>
+                <action android:name=".mainPage.PhotoActivity" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity android:name=".mainPage.CamActivity">
+            <intent-filter>
+                <action android:name=".mainPage.CamActivity" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
         <provider
@@ -41,7 +50,11 @@
 
         <activity android:name=".NavigationActivity"
             android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name=".NavigationActivity" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"

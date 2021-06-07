@@ -25,16 +25,6 @@
             app:destination="@id/connectToDevFragment" />
     </dialog>
     <fragment
-        android:id="@+id/havingRestFragment"
-        android:name="com.example.schooljournal.HavingRestFragment"
-        android:label="fragment_having_rest"
-        tools:layout="@layout/fragment_having_rest" >
-        <action
-            android:id="@+id/action_havingRestFragment_to_viewPagerFragment"
-            app:destination="@id/viewPagerFragment"
-            app:popUpTo="@id/viewPagerFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/viewPagerFragment"
         android:name="com.example.schooljournal.mainPage.ViewPagerFragment"
         android:label="fragment_view_pager"
@@ -43,11 +33,11 @@
             android:id="@+id/action_viewPagerFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
         <action
-            android:id="@+id/action_viewPagerFragment_to_havingRestFragment"
-            app:destination="@id/havingRestFragment" />
-        <action
             android:id="@+id/action_viewPagerFragment_to_photoDialogFragment"
             app:destination="@id/photoDialogFragment" />
+        <action
+            android:id="@+id/action_viewPagerFragment_self"
+            app:popUpTo="@id/viewPagerFragment" />
     </fragment>
     <dialog
         android:id="@+id/photoDialogFragment"
@@ -91,4 +81,5 @@
         android:name="com.example.schooljournal.settings.ConnectToDevFragment"
         android:label="fragment_connect_to_dev"
         tools:layout="@layout/fragment_connect_to_dev" />
+    <include app:graph="@navigation/rest_navigation"/>
 </navigation>

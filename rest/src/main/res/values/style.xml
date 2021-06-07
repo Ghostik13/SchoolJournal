@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="card_view_gif">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:padding">5dp</item>
+        <item name="cardCornerRadius">20dp</item>
+    </style>
+
+    <style name="share_button">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_marginStart">130dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:backgroundTint">#EEE8E8E8</item>
+        <item name="android:src">@drawable/ic_share</item>
+    </style>
+
+    <style name="copy_button">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_marginEnd">130dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:backgroundTint">#EEE8E8E8</item>
+        <item name="android:src">@drawable/ic_copy</item>
+    </style>
+</resources>

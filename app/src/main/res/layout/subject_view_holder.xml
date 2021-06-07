@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="@+id/homework_et" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/gif_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
@@ -37,7 +37,7 @@
         android:inputType="text"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/gif_image"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView

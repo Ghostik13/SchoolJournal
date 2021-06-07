@@ -10,7 +10,7 @@
         android:icon="@drawable/ic_book1"
         android:title="Main" />
     <item
-        android:id="@+id/havingRestFragment"
+        android:id="@+id/rest_navigation"
         android:icon="@drawable/ic_coffee_cup"
         android:title="Rest" />
 </menu>

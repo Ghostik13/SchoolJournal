@@ -1,0 +1,4 @@
+<resources>
+    <string name="connection">Проверьте ваше интернет соединение</string>
+    <string name="copy">URL скопирован в буфер обмена</string>
+</resources>

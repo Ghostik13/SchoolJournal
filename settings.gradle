@@ -1,2 +1,3 @@
+include ':rest'
 include ':app'
 rootProject.name = "School Journal"
