@@ -31,8 +31,3 @@ data class Note(
     val weekId: Int,
     val note: String
 )
-
-//data class Sub(
-//    @ColumnInfo(name = "subjects")
-//    val subjects: List<Subject>
-//)

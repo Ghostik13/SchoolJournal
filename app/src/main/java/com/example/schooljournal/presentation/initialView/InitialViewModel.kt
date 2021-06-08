@@ -10,28 +10,28 @@ class InitialViewModel : ViewModel() {
     private val _today: MutableLiveData<String> = MutableLiveData()
     val today: LiveData<String> = _today
 
-    fun getDate() {
-        val month = convertDate()
+    fun getDate(months: Array<String>) {
+        val month = convertDate(months)
         val today =
             "Сегодня " + Calendar.getInstance().get(Calendar.DAY_OF_MONTH).toString() + " " + month
         _today.value = today
     }
 
-    private fun convertDate(): String? {
+    private fun convertDate(months: Array<String>): String? {
         var monthString: String? = null
         when (Calendar.getInstance().get(Calendar.MONTH)) {
-            0 -> monthString = "января"
-            1 -> monthString = "февраля"
-            2 -> monthString = "марта"
-            3 -> monthString = "апреля"
-            4 -> monthString = "мая"
-            5 -> monthString = "июня"
-            6 -> monthString = "июля"
-            7 -> monthString = "августа"
-            8 -> monthString = "сентября"
-            9 -> monthString = "октября"
-            10 -> monthString = "ноября"
-            11 -> monthString = "декабря"
+            0 -> monthString = months[0]
+            1 -> monthString = months[1]
+            2 -> monthString = months[2]
+            3 -> monthString = months[3]
+            4 -> monthString = months[4]
+            5 -> monthString = months[5]
+            6 -> monthString = months[6]
+            7 -> monthString = months[7]
+            8 -> monthString = months[8]
+            9 -> monthString = months[9]
+            10 -> monthString = months[10]
+            11 -> monthString = months[11]
         }
         return monthString
     }

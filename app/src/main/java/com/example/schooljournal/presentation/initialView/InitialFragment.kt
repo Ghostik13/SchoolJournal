@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.fragment_initial.view.*
 class InitialFragment : Fragment() {
 
     private lateinit var viewModel: InitialViewModel
+    private lateinit var months: Array<String>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,6 +24,7 @@ class InitialFragment : Fragment() {
     ): View? {
         viewModel = ViewModelProvider(this).get(InitialViewModel::class.java)
         val view = inflater.inflate(R.layout.fragment_initial, container, false)
+        months = resources.getStringArray(R.array.months)
         initDate(view)
         view.next_btn.setOnClickListener {
             (requireActivity() as Navigation).initNavigation(ScheduleCreateFragment())
@@ -36,7 +38,7 @@ class InitialFragment : Fragment() {
             R.anim.anim_for_date
         )
         view.today_date.startAnimation(animForDate)
-        viewModel.getDate()
+        viewModel.getDate(months)
         viewModel.today.observe(viewLifecycleOwner, Observer {
             view.today_date.text = it
         })
