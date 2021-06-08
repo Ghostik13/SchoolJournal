@@ -1,2 +1,2 @@
 # SchoolJournal
-Tech stack: MVVM, LiveData, Room, Retrofit+REST API, Coroutines, Koin, Glide
+Tech stack: MVVM, LiveData, Navigation, Room, Retrofit+REST API, Coroutines, Koin, Glide
