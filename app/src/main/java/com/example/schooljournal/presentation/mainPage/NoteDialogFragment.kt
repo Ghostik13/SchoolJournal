@@ -11,7 +11,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.schooljournal.R
-import com.example.schooljournal.data.Note
+import com.example.schooljournal.data.model.Note
 import kotlinx.android.synthetic.main.fragment_note_dialog.view.*
 
 class NoteDialogFragment : DialogFragment() {

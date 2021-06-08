@@ -1,6 +1,8 @@
 package com.example.schooljournal.data
 
-import androidx.lifecycle.LiveData
+import com.example.schooljournal.data.model.Day
+import com.example.schooljournal.data.model.Note
+import com.example.schooljournal.data.model.Subject
 import com.example.schooljournal.domain.SubjectRepository
 
 class SubjectRepositoryImpl(private val dayDao: DayDao) : SubjectRepository {
@@ -17,15 +19,11 @@ class SubjectRepositoryImpl(private val dayDao: DayDao) : SubjectRepository {
         dayDao.insertOneSubject(subject)
     }
 
-    override suspend fun updateDays(subject: List<Subject>, id: Int) {
-        dayDao.updateDay(subject, id)
-    }
-
     override suspend fun getDays(weekId: Int): List<Day> {
         return dayDao.getDays(weekId)
     }
 
-    override suspend fun getIdsForDay(dayOfWeek: String): List<Int> {
+    override suspend fun getIdsForDay(dayOfWeek: Int): List<Int> {
         return dayDao.getIdsForDay(dayOfWeek)
     }
 
@@ -53,12 +51,12 @@ class SubjectRepositoryImpl(private val dayDao: DayDao) : SubjectRepository {
         dayDao.updateNote(note)
     }
 
-    override suspend fun getSubjectsForCurrentDay(dayOfWeek: String): List<String> {
+    override suspend fun getSubjectsForCurrentDay(dayOfWeek: Int): List<String> {
         return dayDao.getSubjectsForCurrentDay(dayOfWeek)
     }
 
     override suspend fun getSubjectsForCurrentDays(
-        dayOfWeek: String,
+        dayOfWeek: Int,
         nameOfSubject: String
     ): List<Subject> {
         return dayDao.getSubjectsForCurrentDays(dayOfWeek, nameOfSubject)

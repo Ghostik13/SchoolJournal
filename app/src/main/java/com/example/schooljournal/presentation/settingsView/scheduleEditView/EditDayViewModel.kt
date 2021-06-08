@@ -1,26 +1,14 @@
 package com.example.schooljournal.presentation.settingsView.scheduleEditView
 
-import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import com.example.schooljournal.data.DayDatabase
-import com.example.schooljournal.data.Subject
-import com.example.schooljournal.data.SubjectRepositoryImpl
+import androidx.lifecycle.*
+import com.example.schooljournal.data.model.Subject
+import com.example.schooljournal.domain.SubjectRepository
 import kotlinx.coroutines.*
 
-class EditDayViewModel(application: Application) : AndroidViewModel(application) {
+class EditDayViewModel(private val repository: SubjectRepository) : ViewModel() {
 
-    private val repository: SubjectRepositoryImpl
-
-    init {
-        val dao = DayDatabase.getInstance(application).dayDao()
-        repository = SubjectRepositoryImpl(dao)
-    }
-
-    fun getSubjectsForCurrentDay(dayOfWeek: String) {
+    fun getSubjectsForCurrentDay(dayOfWeek: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             val subjectNames = repository.getSubjectsForCurrentDay(dayOfWeek)
             withContext(Dispatchers.Main) {
@@ -33,7 +21,7 @@ class EditDayViewModel(application: Application) : AndroidViewModel(application)
     val subjectNames: LiveData<List<String>> = _subjectNames
 
     private suspend fun getSubjectsForCurrentDays(
-        dayOfWeek: String,
+        dayOfWeek: Int,
         nameOfSubject: String
     ): List<Subject> {
         return repository.getSubjectsForCurrentDays(dayOfWeek, nameOfSubject)
@@ -47,7 +35,7 @@ class EditDayViewModel(application: Application) : AndroidViewModel(application)
         name5: String,
         name6: String,
         name7: String,
-        day: String
+        day: Int
     ) {
         observeAndUpdate(name1, firstSubjectList, day)
         observeAndUpdate(name2, secondSubjectList, day)
@@ -61,7 +49,7 @@ class EditDayViewModel(application: Application) : AndroidViewModel(application)
     private fun observeAndUpdate(
         newName: String,
         list: MutableLiveData<List<Subject>>,
-        day: String
+        day: Int
     ) {
         list.observeForever {
             if (it.isEmpty() && newName.isNotEmpty()) {
@@ -115,7 +103,7 @@ class EditDayViewModel(application: Application) : AndroidViewModel(application)
         name5: String,
         name6: String,
         name7: String,
-        day: String
+        day: Int
     ) {
         firstSubjectList.value = checkIfNameOk(name1, day)
         secondSubjectList.value = checkIfNameOk(name2, day)
@@ -126,10 +114,9 @@ class EditDayViewModel(application: Application) : AndroidViewModel(application)
         seventhSubjectList.value = checkIfNameOk(name7, day)
     }
 
-    private fun checkIfNameOk(name: String, day: String): List<Subject> {
+    private fun checkIfNameOk(name: String, day: Int): List<Subject> {
         var list = emptyList<Subject>()
         if (name.isNotEmpty()) {
-            Log.d("textInVM", "ok")
             runBlocking(Dispatchers.IO) {
                 list = getSubjectsForCurrentDays(
                     day,

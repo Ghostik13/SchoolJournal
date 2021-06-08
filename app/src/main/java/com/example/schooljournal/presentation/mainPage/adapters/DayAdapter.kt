@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schooljournal.*
-import com.example.schooljournal.data.Day
+import com.example.schooljournal.data.model.Day
 import com.example.schooljournal.presentation.mainPage.MainPageViewModel
 import kotlinx.android.synthetic.main.day_holder.view.*
 import kotlinx.coroutines.Dispatchers
@@ -39,8 +39,8 @@ class DayAdapter(private val context: Context, private val vm: MainPageViewModel
         val month = currentDay.date.toString().substring(4, 6)
         val day = currentDay.date.toString().substring(6, 8)
         val monthString = convertDate(month)
-        val parser = Parser(currentDay.dayOfTheWeek)
-        holder.itemView.day_tv.text = parser.reverseParsing + ","
+        val parser = Parser("")
+        holder.itemView.day_tv.text = parser.reverseParsingName(currentDay.dayOfTheWeek) + ","
         holder.itemView.date_tv.text = "$day $monthString"
         recyclerView = holder.itemView.recycler_subjects
         val subjectAdapter = SubjectAdapter(

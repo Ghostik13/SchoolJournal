@@ -15,12 +15,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.schooljournal.*
 import com.example.schooljournal.presentation.Navigation
+import com.example.schooljournal.presentation.mainPage.MainPageViewModel
 import com.example.schooljournal.presentation.scheduleCreateView.ScheduleCreateFragment
 import kotlinx.android.synthetic.main.fragment_week_days.view.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WeekDaysFragment : Fragment() {
 
-    private lateinit var viewModel: WeekDayViewModel
+    private val viewModel: WeekDayViewModel by viewModel()
     private lateinit var navigation: Navigation
     private lateinit var edits: List<EditText>
     private lateinit var editStrings: List<String>
@@ -39,7 +41,6 @@ class WeekDaysFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.fragment_week_days, container, false)
-        viewModel = ViewModelProvider(this).get(WeekDayViewModel::class.java)
         navigation = requireActivity() as Navigation
         parser = Parser(text.toString())
         view.dow_tv.text = text
@@ -78,7 +79,7 @@ class WeekDaysFragment : Fragment() {
                 it.text.toString()
             }
             viewModel.fillOutAllLists(parser.parsingName, editStrings)
-            if (parser.parsingName == "сб") {
+            if (parser.parsingName == 6) {
                 (requireActivity() as Navigation).initNavigation(ScheduleCreateFragment())
             } else {
                 (requireActivity() as Navigation).initNavigation(dayFragments[parser.currentIndex])
@@ -101,13 +102,13 @@ class WeekDaysFragment : Fragment() {
 
     private fun visibilitySet() {
         when (parser.parsingName) {
-            "пн" -> textCheck(mon)
-            "вт" -> textCheck(tue)
-            "ср" -> textCheck(wed)
-            "чт" -> textCheck(thu)
-            "пт" -> textCheck(fri)
-            "сб" -> textCheck(sat)
-            "вс" -> textCheck(sun)
+            1 -> textCheck(mon)
+            2 -> textCheck(tue)
+            3 -> textCheck(wed)
+            4 -> textCheck(thu)
+            5 -> textCheck(fri)
+            6 -> textCheck(sat)
+            7 -> textCheck(sun)
         }
     }
 

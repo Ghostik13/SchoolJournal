@@ -48,5 +48,5 @@
         app:layout_constraintBottom_toBottomOf="@+id/homework_et"
         app:layout_constraintEnd_toEndOf="@+id/homework_et"
         app:layout_constraintTop_toTopOf="@+id/homework_et"
-        app:srcCompat="@drawable/ic_photo" />
+        app:srcCompat="@drawable/ic_camera" />
 </androidx.constraintlayout.widget.ConstraintLayout>

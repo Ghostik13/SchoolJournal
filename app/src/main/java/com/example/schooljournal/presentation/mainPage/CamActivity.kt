@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.schooljournal.presentation.CAMERA_REQUEST
 import com.example.schooljournal.presentation.NavigationActivity
 import com.example.schooljournal.R
-import com.example.schooljournal.data.Subject
+import com.example.schooljournal.data.model.Subject
 import com.example.schooljournal.toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -50,7 +50,7 @@ class CamActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             val name = intent.getStringExtra("name").toString()
-            val dayOfWeek = intent.getStringExtra("dayOfWeek").toString()
+            val dayOfWeek = intent.getIntExtra("dayOfWeek", 0)
             val id = intent.getIntExtra("id", 0)
             val dayId = intent.getIntExtra("dayId", 0)
             val homework = intent.getStringExtra("hw").toString()

@@ -1,10 +1,9 @@
 package com.example.schooljournal.presentation.weekDayView
 
-import android.app.Application
 import androidx.lifecycle.*
 import com.example.schooljournal.*
 
-class WeekDayViewModel(application: Application) : AndroidViewModel(application) {
+class WeekDayViewModel : ViewModel() {
 
     private fun addSubjectsToList(subjectList: MutableList<String>, listOfEdits: List<String>) {
         for (i in subjectList.indices) {
@@ -12,15 +11,15 @@ class WeekDayViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-    fun fillOutAllLists(nameOfDay: String, listOfEdits: List<String>) {
+    fun fillOutAllLists(nameOfDay: Int, listOfEdits: List<String>) {
         when (nameOfDay) {
-            "пн" -> addSubjectsToList(mon, listOfEdits)
-            "вт" -> addSubjectsToList(tue, listOfEdits)
-            "ср" -> addSubjectsToList(wed, listOfEdits)
-            "чт" -> addSubjectsToList(thu, listOfEdits)
-            "пт" -> addSubjectsToList(fri, listOfEdits)
-            "сб" -> addSubjectsToList(sat, listOfEdits)
-            "вс" -> addSubjectsToList(sun, listOfEdits)
+            1 -> addSubjectsToList(mon, listOfEdits)
+            2 -> addSubjectsToList(tue, listOfEdits)
+            3 -> addSubjectsToList(wed, listOfEdits)
+            4 -> addSubjectsToList(thu, listOfEdits)
+            5 -> addSubjectsToList(fri, listOfEdits)
+            6 -> addSubjectsToList(sat, listOfEdits)
+            7 -> addSubjectsToList(sun, listOfEdits)
         }
     }
 

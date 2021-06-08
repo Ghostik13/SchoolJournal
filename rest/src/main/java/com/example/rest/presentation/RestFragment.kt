@@ -1,14 +1,11 @@
 package com.example.rest.presentation
 
 import android.content.Intent
-import android.content.res.AssetManager
-import android.graphics.Typeface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +14,6 @@ import com.example.rest.Constants
 import com.example.rest.R
 import kotlinx.android.synthetic.main.fragment_rest.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.lang.Exception
 
 class RestFragment : Fragment(), SearchView.OnQueryTextListener {
 

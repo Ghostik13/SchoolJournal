@@ -7,17 +7,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
 import com.example.schooljournal.*
-import com.example.schooljournal.data.Day
 import com.example.schooljournal.presentation.Navigation
 import com.example.schooljournal.presentation.NavigationActivity
 import kotlinx.android.synthetic.main.fragment_schedule_create.view.*
-import java.util.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ScheduleCreateFragment : Fragment() {
 
-    private lateinit var viewModel: ScheduleCreateViewModel
+    private val viewModel: ScheduleCreateViewModel by viewModel()
     private lateinit var nav: Navigation
 
     override fun onCreateView(
@@ -25,7 +23,6 @@ class ScheduleCreateFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.fragment_schedule_create, container, false)
-        viewModel = ViewModelProvider(this).get(ScheduleCreateViewModel::class.java)
         nav = activity as Navigation
         initDayButtons(view)
         initReadyButton(view)
@@ -35,16 +32,7 @@ class ScheduleCreateFragment : Fragment() {
     private fun initReadyButton(view: View) {
         view.ready_btn.setOnClickListener {
             firstRunFinished()
-            viewModel.insertDates()
-            viewModel.insertDays()
             viewModel.insertAllData()
-            viewModel.insertSubjects("пн", mon)
-            viewModel.insertSubjects("вт", tue)
-            viewModel.insertSubjects("ср", wed)
-            viewModel.insertSubjects("чт", thu)
-            viewModel.insertSubjects("пт", fri)
-            viewModel.insertSubjects("сб", sat)
-            viewModel.insertSubjects("вс", sun)
             val intent = Intent(requireContext(), NavigationActivity::class.java)
             startActivity(intent)
         }

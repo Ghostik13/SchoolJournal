@@ -8,6 +8,7 @@ import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 import androidx.multidex.MultiDex
 import com.example.rest.di.*
+import com.example.schooljournal.di.*
 
 class App : Application() {
 
@@ -19,8 +20,15 @@ class App : Application() {
             modules(
                 listOf(
                     mainViewModelModule,
-                    repository,
+                    scheduleCreateViewModelModule,
+                    editDayViewModelModule,
+                    weekDayViewModelModule,
+                    initialViewModelModule,
+                    subjectRepository,
+                    databaseModule,
                     gifViewModelModule,
+                    gifRepository,
+                    gifDetailViewModelModule,
                     netModule,
                     apiModule
                 )

@@ -15,17 +15,19 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.schooljournal.Parser
 import com.example.schooljournal.R
+import com.example.schooljournal.presentation.mainPage.MainPageViewModel
 import kotlinx.android.synthetic.main.fragment_edit_day.view.*
 import kotlinx.android.synthetic.main.fragment_week_days.view.dow_tv
 import kotlinx.android.synthetic.main.fragment_week_days.view.fab_back
 import kotlinx.android.synthetic.main.fragment_week_days.view.next_button
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EditDayFragment : Fragment() {
 
     private val args by navArgs<EditDayFragmentArgs>()
     private lateinit var dayArray: Array<String>
     private lateinit var edits: List<EditText>
-    private lateinit var viewModel: EditDayViewModel
+    private val viewModel: EditDayViewModel by viewModel()
     private lateinit var parser: Parser
 
     override fun onCreateView(
@@ -33,7 +35,6 @@ class EditDayFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_edit_day, container, false)
-        viewModel = ViewModelProvider(this).get(EditDayViewModel::class.java)
         view.dow_tv.text = args.NameOfDay
         parser = Parser(args.NameOfDay)
         dayArray = resources.getStringArray(R.array.daysFull)

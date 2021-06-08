@@ -3,6 +3,9 @@ package com.example.schooljournal.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.room.*
+import com.example.schooljournal.data.model.Day
+import com.example.schooljournal.data.model.Note
+import com.example.schooljournal.data.model.Subject
 
 @Dao
 interface DayDao {
@@ -19,6 +22,12 @@ interface DayDao {
     @Insert
     suspend fun insertNote(note: Note)
 
+    @Update
+    fun updateHomework(subject: Subject)
+
+    @Update
+    fun updateNote(note: Note)
+
     @Query("SELECT * FROM note_table WHERE weekId =:weekId")
     fun getNote(weekId: Int): Note
 
@@ -28,31 +37,22 @@ interface DayDao {
     @Query("SELECT homework FROM subject_table WHERE id = :currentId")
     fun getHomework(currentId: Int): String
 
-    @Update
-    fun updateHomework(subject: Subject)
-
-    @Update
-    fun updateNote(note: Note)
-
     @Query("SELECT * FROM day_table WHERE weekId = :weekId")
     suspend fun getDays(weekId: Int): List<Day>
 
     @Query("SELECT id FROM day_table WHERE dayOfTheWeek =:dayOfWeek")
-    suspend fun getIdsForDay(dayOfWeek: String): List<Int>
+    suspend fun getIdsForDay(dayOfWeek: Int): List<Int>
 
-    @Query("UPDATE day_table SET subjects = :subject WHERE id = :id")    //обновляем сабджекты в таблице day_table
-    fun updateDay(subject: List<Subject>, id: Int)
-
-    @Query("SELECT * FROM subject_table WHERE dayId = :id")      //получаем список предметов для айди конкретного дня
+    @Query("SELECT * FROM subject_table WHERE dayId = :id")
     suspend fun getCurrentSubjects(id: Int): List<Subject>
 
     @Query("SELECT * FROM subject_table WHERE dayOfWeek = :dayOfWeek")
-    fun getSubjects(dayOfWeek: String): LiveData<List<Subject>>
+    fun getSubjects(dayOfWeek: Int): LiveData<List<Subject>>
 
     @Query("SELECT DISTINCT name FROM subject_table WHERE dayOfWeek = :dayOfWeek ")
-    fun getSubjectsForCurrentDay(dayOfWeek: String): List<String>
+    fun getSubjectsForCurrentDay(dayOfWeek: Int): List<String>
 
     @Query("SELECT * FROM subject_table WHERE dayOfWeek = :dayOfWeek AND name = :nameOfSubject")
-    fun getSubjectsForCurrentDays(dayOfWeek: String, nameOfSubject: String): List<Subject>
+    fun getSubjectsForCurrentDays(dayOfWeek: Int, nameOfSubject: String): List<Subject>
 
 }

@@ -13,15 +13,15 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-val mainViewModelModule = module {
+val gifViewModelModule = module {
     viewModel { GifViewModel(get()) }
 }
 
-val gifViewModelModule = module {
+val gifDetailViewModelModule = module {
     viewModel { GifDetailViewModel() }
 }
 
-val repository = module {
+val gifRepository = module {
     fun provideRepository(api: GiphyApi): GifRepositoryImpl {
         return GifRepositoryImpl(api)
     }

@@ -1,66 +1,65 @@
 package com.example.schooljournal
 
-class Parser(name: String) {
+class Parser(nameOfDay: String) {
 
     var currentIndex = 0
-    val parsingName = parsingName(name)
-    val reverseParsing = reverseParsingName(name)
+    val parsingName = parsingName(nameOfDay)
 
-    private fun parsingName(name: String): String {
+    private fun parsingName(name: String): Int {
         when (name) {
             "Понедельник" -> {
                 currentIndex = 1
-                return "пн"
+                return 1
             }
             "Вторник" -> {
                 currentIndex = 2
-                return "вт"
+                return 2
             }
             "Среда" -> {
                 currentIndex = 3
-                return "ср"
+                return 3
             }
             "Четверг" -> {
                 currentIndex = 4
-                return "чт"
+                return 4
             }
             "Пятница" -> {
                 currentIndex = 5
-                return "пт"
+                return 5
             }
             "Суббота" -> {
                 currentIndex = 6
-                return "сб"
+                return 6
             }
             "Воскресенье" -> {
                 currentIndex = 0
-                return "вс"
+                return 7
             }
         }
-        return "null"
+        return 0
     }
 
-    private fun reverseParsingName(name: String): String {
+    fun reverseParsingName(name: Int): String {
         when (name) {
-            "пн" -> {
+            1 -> {
                 return "Понедельник"
             }
-            "вт" -> {
+            2 -> {
                 return "Вторник"
             }
-            "ср" -> {
+            3 -> {
                 return "Среда"
             }
-            "чт" -> {
+            4 -> {
                 return "Четверг"
             }
-            "пт" -> {
+            5 -> {
                 return "Пятница"
             }
-            "сб" -> {
+            6 -> {
                 return "Суббота"
             }
-            "вс" -> {
+            7 -> {
                 return "Воскресенье"
             }
         }

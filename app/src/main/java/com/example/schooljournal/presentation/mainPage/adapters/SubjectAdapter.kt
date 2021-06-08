@@ -13,7 +13,7 @@ import androidx.core.app.ActivityCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.schooljournal.presentation.NavigationActivity
 import com.example.schooljournal.R
-import com.example.schooljournal.data.Subject
+import com.example.schooljournal.data.model.Subject
 import com.example.schooljournal.presentation.mainPage.CamActivity
 import com.example.schooljournal.presentation.mainPage.MainPageViewModel
 import com.example.schooljournal.presentation.mainPage.PhotoDialogFragment

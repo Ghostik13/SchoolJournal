@@ -1,6 +1,7 @@
-package com.example.schooljournal.data
+package com.example.schooljournal.data.converters
 
 import androidx.room.TypeConverter
+import com.example.schooljournal.data.model.Subject
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

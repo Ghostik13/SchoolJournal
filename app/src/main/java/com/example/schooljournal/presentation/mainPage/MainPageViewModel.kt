@@ -1,24 +1,16 @@
 package com.example.schooljournal.presentation.mainPage
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import com.example.schooljournal.data.*
+import androidx.lifecycle.*
+import com.example.schooljournal.data.model.Day
+import com.example.schooljournal.data.model.Note
+import com.example.schooljournal.data.model.Subject
+import com.example.schooljournal.domain.SubjectRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
-class MainPageViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val repository: SubjectRepositoryImpl
-
-    init {
-        val dao = DayDatabase.getInstance(application).dayDao()
-        repository = SubjectRepositoryImpl(dao)
-    }
+class MainPageViewModel(private val repository: SubjectRepository) : ViewModel() {
 
     fun getDays(weekId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -65,7 +57,7 @@ class MainPageViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun updateHomework(subject: Subject) {
-       runBlocking(Dispatchers.IO) {
+        runBlocking(Dispatchers.IO) {
             repository.updateSubject(subject)
         }
     }
