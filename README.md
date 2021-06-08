@@ -1,2 +1,2 @@
 # SchoolJournal
-Android app: MVVM, Room, Retrofit+REST API, Coroutines
+Tech stack: MVVM, LiveData, Room, Retrofit+REST API, Coroutines, Koin, Glide
