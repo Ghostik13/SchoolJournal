@@ -13,22 +13,4 @@ import com.example.schooljournal.data.model.Subject
 abstract class DayDatabase : RoomDatabase() {
 
     abstract val dayDao: DayDao
-//
-//    companion object {
-//
-//        @Volatile
-//        private var INSTANCE: DayDatabase? = null
-//
-//        fun getInstance(context: Context): DayDatabase =
-//            INSTANCE ?: synchronized(this) {
-//                INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
-//            }
-//
-//        private fun buildDatabase(context: Context) =
-//            Room.databaseBuilder(
-//                context.applicationContext,
-//                DayDatabase::class.java, "Day.db"
-//            )
-//                .build()
-//    }
 }

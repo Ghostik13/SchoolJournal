@@ -23,31 +23,25 @@ interface DayDao {
     suspend fun insertNote(note: Note)
 
     @Update
-    fun updateHomework(subject: Subject)
+    suspend fun updateHomework(subject: Subject)
 
     @Update
-    fun updateNote(note: Note)
+    suspend fun updateNote(note: Note)
 
     @Query("SELECT * FROM note_table WHERE weekId =:weekId")
     fun getNote(weekId: Int): Note
-
-    @Query("SELECT * FROM day_table WHERE subjects NOT LIKE  '[]'")
-    fun getWorkDays(): LiveData<List<Day>>
 
     @Query("SELECT homework FROM subject_table WHERE id = :currentId")
     fun getHomework(currentId: Int): String
 
     @Query("SELECT * FROM day_table WHERE weekId = :weekId")
-    suspend fun getDays(weekId: Int): List<Day>
+    fun getDays(weekId: Int): List<Day>
 
     @Query("SELECT id FROM day_table WHERE dayOfTheWeek =:dayOfWeek")
-    suspend fun getIdsForDay(dayOfWeek: Int): List<Int>
+    fun getIdsForDay(dayOfWeek: Int): List<Int>
 
     @Query("SELECT * FROM subject_table WHERE dayId = :id")
-    suspend fun getCurrentSubjects(id: Int): List<Subject>
-
-    @Query("SELECT * FROM subject_table WHERE dayOfWeek = :dayOfWeek")
-    fun getSubjects(dayOfWeek: Int): LiveData<List<Subject>>
+    fun getCurrentSubjects(id: Int): List<Subject>
 
     @Query("SELECT DISTINCT name FROM subject_table WHERE dayOfWeek = :dayOfWeek ")
     fun getSubjectsForCurrentDay(dayOfWeek: Int): List<String>

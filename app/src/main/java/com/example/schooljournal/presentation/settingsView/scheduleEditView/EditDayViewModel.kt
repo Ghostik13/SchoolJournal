@@ -1,6 +1,5 @@
 package com.example.schooljournal.presentation.settingsView.scheduleEditView
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.schooljournal.data.model.Subject
 import com.example.schooljournal.domain.SubjectRepository
@@ -15,12 +14,13 @@ class EditDayViewModel(private val repository: SubjectRepository) : ViewModel() 
                 _subjectNames.value = subjectNames
             }
         }
+
     }
 
     private val _subjectNames: MutableLiveData<List<String>> = MutableLiveData()
     val subjectNames: LiveData<List<String>> = _subjectNames
 
-    private suspend fun getSubjectsForCurrentDays(
+    private fun getSubjectsForCurrentDays(
         dayOfWeek: Int,
         nameOfSubject: String
     ): List<Subject> {
@@ -55,10 +55,10 @@ class EditDayViewModel(private val repository: SubjectRepository) : ViewModel() 
             if (it.isEmpty() && newName.isNotEmpty()) {
                 viewModelScope.launch(Dispatchers.IO) {
                     val ids = repository.getIdsForDay(day)
-                    withContext(Dispatchers.Main) {
-                        ids.forEach { dayId ->
-                            val subject =
-                                Subject(0, dayId, newName, "", day, "")
+                    ids.forEach { dayId ->
+                        val subject =
+                            Subject(0, dayId, newName, "", day, "")
+                        withContext(Dispatchers.Main) {
                             insertOneSubject(subject)
                         }
                     }
@@ -117,12 +117,10 @@ class EditDayViewModel(private val repository: SubjectRepository) : ViewModel() 
     private fun checkIfNameOk(name: String, day: Int): List<Subject> {
         var list = emptyList<Subject>()
         if (name.isNotEmpty()) {
-            runBlocking(Dispatchers.IO) {
-                list = getSubjectsForCurrentDays(
-                    day,
-                    name
-                )
+            val job = viewModelScope.launch(Dispatchers.IO) {
+                list = getSubjectsForCurrentDays(day, name)
             }
+            runBlocking { job.join() }
         }
         return list
     }
