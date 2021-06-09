@@ -7,20 +7,21 @@
     android:background="@drawable/dialog_bg"
     tools:context=".presentation.mainPage.NoteDialogFragment">
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/submit_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="#FFFFFF"
-        android:fontFamily="@font/myriad_bold"
-        android:foregroundTint="#B55757"
-        android:text="@string/add"
-        android:textColor="#FDA460"
+        style="@style/fab"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:scaleType="center"
+        android:src="@drawable/plus"
+        app:backgroundTint="#FF9900"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.552"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/note_et" />
+        app:layout_constraintTop_toBottomOf="@+id/note_et"
+        app:layout_constraintVertical_bias="0.0"
+        app:tint="@color/white" />
 
     <EditText
         android:id="@+id/note_et"
@@ -48,7 +49,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/submit_button">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -79,10 +82,10 @@
             android:layout_height="32dp"
             android:layout_marginStart="8dp"
             android:src="@drawable/ic_quill"
-            app:tint="#838282"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/my_note_tv"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#838282" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
