@@ -48,11 +48,11 @@ class MainPageViewModel(private val repository: SubjectRepository) : ViewModel()
         }
     }
 
-    suspend fun getCurrentSubjects(id: Int): List<Subject> {
+    fun getCurrentSubjects(id: Int): List<Subject> {
         return repository.getCurrentSubjects(id)
     }
 
-    suspend fun getHomework(currentId: Int): String {
+    fun getHomework(currentId: Int): String {
         return repository.getHomework(currentId)
     }
 

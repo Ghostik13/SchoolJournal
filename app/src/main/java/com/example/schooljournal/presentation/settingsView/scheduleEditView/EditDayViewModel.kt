@@ -20,13 +20,6 @@ class EditDayViewModel(private val repository: SubjectRepository) : ViewModel() 
     private val _subjectNames: MutableLiveData<List<String>> = MutableLiveData()
     val subjectNames: LiveData<List<String>> = _subjectNames
 
-    private fun getSubjectsForCurrentDays(
-        dayOfWeek: Int,
-        nameOfSubject: String
-    ): List<Subject> {
-        return repository.getSubjectsForCurrentDays(dayOfWeek, nameOfSubject)
-    }
-
     fun updateSubjects(
         name1: String,
         name2: String,
@@ -53,15 +46,15 @@ class EditDayViewModel(private val repository: SubjectRepository) : ViewModel() 
     ) {
         list.observeForever {
             if (it.isEmpty() && newName.isNotEmpty()) {
-                viewModelScope.launch(Dispatchers.IO) {
-                    val ids = repository.getIdsForDay(day)
-                    ids.forEach { dayId ->
-                        val subject =
-                            Subject(0, dayId, newName, "", day, "")
-                        withContext(Dispatchers.Main) {
-                            insertOneSubject(subject)
-                        }
-                    }
+                var ids = emptyList<Int>()
+                val job = viewModelScope.launch(Dispatchers.IO) {
+                    ids = repository.getIdsForDay(day)
+                }
+                runBlocking { job.join() }
+                ids.forEach { dayId ->
+                    val subject =
+                        Subject(0, dayId, newName, "", day, "")
+                    insertOneSubject(subject)
                 }
             } else {
                 for (i in 0..it.lastIndex) {
@@ -73,9 +66,10 @@ class EditDayViewModel(private val repository: SubjectRepository) : ViewModel() 
                         it[i].dayOfWeek,
                         it[i].photo
                     )
-                    viewModelScope.launch(Dispatchers.IO) {
+                    val job = viewModelScope.launch(Dispatchers.IO) {
                         repository.updateSubject(updatedSubject)
                     }
+                    runBlocking { job.join() }
                 }
             }
         }
@@ -118,7 +112,7 @@ class EditDayViewModel(private val repository: SubjectRepository) : ViewModel() 
         var list = emptyList<Subject>()
         if (name.isNotEmpty()) {
             val job = viewModelScope.launch(Dispatchers.IO) {
-                list = getSubjectsForCurrentDays(day, name)
+                list = repository.getSubjectsForCurrentDays(day, name)
             }
             runBlocking { job.join() }
         }
