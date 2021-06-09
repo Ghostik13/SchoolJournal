@@ -7,11 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.schooljournal.*
+import com.example.schooljournal.utils.*
 import com.example.schooljournal.databinding.FragmentScheduleCreateBinding
 import com.example.schooljournal.presentation.Navigation
 import com.example.schooljournal.presentation.NavigationActivity
-import kotlinx.android.synthetic.main.fragment_schedule_create.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ScheduleCreateFragment : Fragment() {
@@ -19,7 +18,7 @@ class ScheduleCreateFragment : Fragment() {
     private val viewModel: ScheduleCreateViewModel by viewModel()
     private lateinit var nav: Navigation
 
-    private var _binding: FragmentScheduleCreateBinding?= null
+    private var _binding: FragmentScheduleCreateBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -29,13 +28,13 @@ class ScheduleCreateFragment : Fragment() {
         _binding = FragmentScheduleCreateBinding.inflate(inflater, container, false)
         val view = binding.root
         nav = activity as Navigation
-        initDayButtons(view)
-        initReadyButton(view)
+        initDayButtons()
+        initReadyButton()
         return view
     }
 
-    private fun initReadyButton(view: View) {
-        view.ready_btn.setOnClickListener {
+    private fun initReadyButton() {
+        binding.readyBtn.setOnClickListener {
             firstRunFinished()
             viewModel.insertAllData()
             val intent = Intent(requireContext(), NavigationActivity::class.java)
@@ -51,27 +50,29 @@ class ScheduleCreateFragment : Fragment() {
         editor.apply()
     }
 
-    private fun initDayButtons(view: View) {
-        view.mo_btn.setOnClickListener {
-            nav.initNavigation(dayFragments[0])
-        }
-        view.tu_btn.setOnClickListener {
-            nav.initNavigation(dayFragments[1])
-        }
-        view.we_btn.setOnClickListener {
-            nav.initNavigation(dayFragments[2])
-        }
-        view.th_btn.setOnClickListener {
-            nav.initNavigation(dayFragments[3])
-        }
-        view.fr_btn.setOnClickListener {
-            nav.initNavigation(dayFragments[4])
-        }
-        view.sa_btn.setOnClickListener {
-            nav.initNavigation(dayFragments[5])
-        }
-        view.su_btn.setOnClickListener {
-            nav.initNavigation(dayFragments[6])
+    private fun initDayButtons() {
+        with(binding) {
+            moBtn.setOnClickListener {
+                nav.initNavigation(dayFragments[0])
+            }
+            tuBtn.setOnClickListener {
+                nav.initNavigation(dayFragments[1])
+            }
+            weBtn.setOnClickListener {
+                nav.initNavigation(dayFragments[2])
+            }
+            thBtn.setOnClickListener {
+                nav.initNavigation(dayFragments[3])
+            }
+            frBtn.setOnClickListener {
+                nav.initNavigation(dayFragments[4])
+            }
+            saBtn.setOnClickListener {
+                nav.initNavigation(dayFragments[5])
+            }
+            suBtn.setOnClickListener {
+                nav.initNavigation(dayFragments[6])
+            }
         }
     }
 }

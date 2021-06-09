@@ -6,15 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.example.schooljournal.*
+import com.example.schooljournal.R
+import com.example.schooljournal.utils.*
 import com.example.schooljournal.databinding.FragmentMainPageBinding
-import com.example.schooljournal.databinding.FragmentNoteDialogBinding
 import com.example.schooljournal.presentation.mainPage.adapters.DayAdapter
-import kotlinx.android.synthetic.main.fragment_main_page.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainPageFragment : Fragment() {
@@ -42,14 +40,14 @@ class MainPageFragment : Fragment() {
     ): View {
         _binding = FragmentMainPageBinding.inflate(inflater, container, false)
         val view = binding.root
-        initRecyclerView(view)
-        changeWeeks(view)
-        initAddNoteFab(view)
+        initRecyclerView()
+        changeWeeks()
+        initAddNoteFab()
         return view
     }
 
-    private fun initAddNoteFab(view: View) {
-        view.fab.setOnClickListener {
+    private fun initAddNoteFab() {
+        binding.fab.setOnClickListener {
             val dialogFragment = NoteDialogFragment()
             val bundle = Bundle()
             bundle.putInt("weekId", weekId)
@@ -58,21 +56,27 @@ class MainPageFragment : Fragment() {
         }
     }
 
-    private fun changeWeeks(view: View) {
+    private fun changeWeeks() {
+        if(weekId == 1) {
+            binding.previousWeek.visibility = View.GONE
+        }
+        else if (weekId == 53) {
+            binding.nextWeek.visibility = View.GONE
+        }
         val viewPager = activity?.findViewById<ViewPager2>(R.id.view_pager)
-        view.next_week.setOnClickListener {
+        binding.nextWeek.setOnClickListener {
             viewPager?.currentItem = weekId
         }
-        view.previous_week.setOnClickListener {
+        binding.previousWeek.setOnClickListener {
             if (weekId > 1) {
                 viewPager?.currentItem = weekId - 2
             }
         }
     }
 
-    private fun initRecyclerView(view: View) {
+    private fun initRecyclerView() {
         val dayAdapter = DayAdapter(requireContext(), viewModel)
-        recyclerViewDays = view.recycler_view
+        recyclerViewDays = binding.recyclerView
         recyclerViewDays.adapter = dayAdapter
         recyclerViewDays.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)

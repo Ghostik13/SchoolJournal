@@ -1,4 +1,4 @@
-package com.example.schooljournal
+package com.example.schooljournal.utils
 
 class Parser(nameOfDay: String) {
 

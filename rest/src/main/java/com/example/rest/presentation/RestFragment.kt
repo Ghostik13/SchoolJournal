@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.rest.Constants
 import com.example.rest.databinding.FragmentRestBinding
-import kotlinx.android.synthetic.main.fragment_rest.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RestFragment : Fragment(), SearchView.OnQueryTextListener {
@@ -39,23 +38,22 @@ class RestFragment : Fragment(), SearchView.OnQueryTextListener {
     ): View {
         _binding = FragmentRestBinding.inflate(inflater, container, false)
         val view = binding.root
-        initSearchView(view)
-        observeConnectionException(view)
-        initRecyclerView(view)
+        initSearchView()
+        observeConnectionException()
+        initRecyclerView()
         initTrendGifs()
         return view
     }
 
-    private fun initRecyclerView(view: View) {
-        recyclerView = view.gif_rv
+    private fun initRecyclerView() {
+        recyclerView = binding.gifRv
         recyclerView.adapter = adapter
         recyclerView.layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
     }
 
-    private fun initSearchView(view: View) {
-        searchView = view.search_view
-        searchView.isSubmitButtonEnabled = true
+    private fun initSearchView() {
+        searchView = binding.searchView
         searchView.setOnQueryTextListener(this)
     }
 
@@ -68,9 +66,9 @@ class RestFragment : Fragment(), SearchView.OnQueryTextListener {
         })
     }
 
-    private fun observeConnectionException(view: View) {
+    private fun observeConnectionException() {
         viewModel.errorMessage.observe(viewLifecycleOwner, Observer {
-            view.error_tv.text = getString(it)
+            binding.errorTv.text = getString(it)
         })
     }
 

@@ -1,11 +1,16 @@
 <component name="ProjectDictionaryState">
   <dictionary name="User">
     <words>
+      <w>cardview</w>
+      <w>constraintlayout</w>
       <w>gifs</w>
+      <w>tvdate</w>
+      <w>tvday</w>
       <w>воскресенье</w>
       <w>вторник</w>
       <w>понедельник</w>
       <w>пятница</w>
+      <w>сегодня</w>
       <w>среда</w>
       <w>суббота</w>
       <w>четверг</w>

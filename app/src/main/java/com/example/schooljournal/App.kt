@@ -28,7 +28,6 @@ class App : Application() {
                     databaseModule,
                     gifViewModelModule,
                     gifRepository,
-                    gifDetailViewModelModule,
                     netModule,
                     apiModule
                 )

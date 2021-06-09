@@ -38,7 +38,6 @@
           motion:layout_constraintTop_toTopOf="parent"
           android:rotation="90" />
         <Constraint
-            android:id="@+id/share_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             motion:srcCompat="@drawable/ic_send"
@@ -75,7 +74,6 @@
             motion:layout_constraintTop_toTopOf="parent"
             android:rotation="270"/>
         <Constraint
-            android:id="@+id/share_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             motion:srcCompat="@drawable/ic_send"

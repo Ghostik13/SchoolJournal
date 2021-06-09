@@ -10,11 +10,8 @@ import android.view.Window
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.schooljournal.R
 import com.example.schooljournal.data.model.Note
 import com.example.schooljournal.databinding.FragmentNoteDialogBinding
-import com.example.schooljournal.databinding.FragmentPhotoDialogBinding
-import kotlinx.android.synthetic.main.fragment_note_dialog.view.*
 
 class NoteDialogFragment : DialogFragment() {
 
@@ -32,24 +29,24 @@ class NoteDialogFragment : DialogFragment() {
         viewModel = ViewModelProvider(this).get(MainPageViewModel::class.java)
         dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog!!.window!!.requestFeature(Window.FEATURE_NO_TITLE)
-        initNote(view)
+        initNote()
         return view
     }
 
-    private fun initNote(view: View) {
+    private fun initNote() {
         val weekIdNull = this.arguments?.getInt("weekId")
         val weekId: Int = weekIdNull!!.toInt()
         viewModel.getNote(weekId.toString().toInt())
         viewModel.note.observe(viewLifecycleOwner, Observer {
             if (it != null) {
-                view.note_et.setText(it.note)
+                binding.noteEt.setText(it.note)
             } else {
                 val note = Note(0, weekId, "")
                 viewModel.insertNote(note)
             }
         })
-        view.submit_button.setOnClickListener {
-            val text = view.note_et.text.toString()
+        binding.submitButton.setOnClickListener {
+            val text = binding.noteEt.text.toString()
             val newNote = Note(weekId, weekId, text)
             viewModel.updateNote(newNote)
             dismiss()

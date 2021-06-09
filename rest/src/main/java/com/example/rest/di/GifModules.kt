@@ -4,7 +4,6 @@ import android.app.Application
 import com.example.rest.Constants
 import com.example.rest.data.GifRepositoryImpl
 import com.example.rest.domain.GifRepository
-import com.example.rest.presentation.GifDetailViewModel
 import com.example.rest.presentation.GifViewModel
 import com.example.rest.remote.GiphyApi
 import okhttp3.Cache
@@ -15,10 +14,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val gifViewModelModule = module {
     viewModel { GifViewModel(get()) }
-}
-
-val gifDetailViewModelModule = module {
-    viewModel { GifDetailViewModel() }
 }
 
 val gifRepository = module {

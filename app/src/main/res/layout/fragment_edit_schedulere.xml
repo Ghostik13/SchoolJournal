@@ -19,15 +19,13 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/top_text"
                 style="@style/text_top"
-                android:text="Измените расписание"
+                android:text="@string/edit_schedule_tv"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/icon_logo"
                 style="@style/next_iv"
                 android:src="@drawable/logo_icon"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -113,7 +111,6 @@
             app:layout_constraintTop_toBottomOf="@+id/fr_btn" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"

@@ -7,9 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import com.example.schooljournal.databinding.FragmentViewPagerBinding
-import com.example.schooljournal.fragments
+import com.example.schooljournal.utils.*
 import com.example.schooljournal.presentation.mainPage.adapters.ViewPagerAdapter
-import kotlinx.android.synthetic.main.fragment_view_pager.view.*
 import java.util.ArrayList
 
 class ViewPagerFragment : Fragment() {
@@ -42,7 +41,7 @@ class ViewPagerFragment : Fragment() {
                 requireActivity().supportFragmentManager,
                 lifecycle
             )
-        view.view_pager.adapter = adapter
+        binding.viewPager.adapter = adapter
         return view
     }
 

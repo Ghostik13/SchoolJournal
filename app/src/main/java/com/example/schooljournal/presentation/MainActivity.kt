@@ -15,6 +15,8 @@ class MainActivity : AppCompatActivity(), Navigation {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
         if (firstRunFinished()) {
             startActivity(Intent(this, NavigationActivity::class.java))
         } else initFragment()

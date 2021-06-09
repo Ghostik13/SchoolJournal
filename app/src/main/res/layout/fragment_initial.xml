@@ -9,23 +9,15 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="380dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/myriad_regular"
-        android:gravity="center"
+        style="@style/initial_text"
         android:text="@string/intro_text"
-        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginTop="24dp"
+        style="@style/initial_logo"
         android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -43,47 +35,28 @@
 
         <TextView
             android:id="@+id/error_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="64dp"
-            android:fontFamily="@font/myriad_regular"
+            style="@style/make_tv"
             android:text="@string/create"
-            android:textColor="@color/white"
-            android:textSize="40sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:fontFamily="@font/myriad_regular"
+            style="@style/tv_right_now"
             android:text="@string/rightnow"
-            android:textColor="@color/white"
-            android:textSize="40sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/schedule_tv" />
 
         <TextView
             android:id="@+id/schedule_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:fontFamily="@font/myriad_bold"
+            style="@style/tv_schedule"
             android:text="@string/schedule"
-            android:textColor="#FFF200"
-            android:textSize="40sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/error_tv" />
 
         <ImageView
             android:id="@+id/next_btn"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            style="@style/iv_next"
             android:src="@drawable/ic_next"
             app:layout_constraintBottom_toTopOf="@+id/textView4"
             app:layout_constraintEnd_toEndOf="parent"
@@ -92,14 +65,8 @@
 
         <TextView
             android:id="@+id/today_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="48dp"
-            android:fontFamily="@font/myriad_regular"
-            android:text="Сегодня 16 апреля"
-            android:textColor="@color/white"
-            android:textSize="32sp"
+            style="@style/tv_today_date"
+            android:text="@string/_16"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

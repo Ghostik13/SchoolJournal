@@ -1,15 +1,12 @@
 package com.example.rest.presentation
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
-import com.example.rest.R
 import com.example.rest.data.model.Data
-import kotlinx.android.synthetic.main.gif_item.view.*
+import com.example.rest.databinding.GifItemBinding
 
 class GifAdapter(private val onClick: (Data) -> Unit) :
     RecyclerView.Adapter<GifAdapter.GifViewHolder>() {
@@ -17,12 +14,8 @@ class GifAdapter(private val onClick: (Data) -> Unit) :
     private var gifList = emptyList<Data>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GifViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater.inflate(
-            R.layout.gif_item,
-            parent,
-            false)
-        return GifViewHolder(view)
+        val binding = GifItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return GifViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -39,8 +32,8 @@ class GifAdapter(private val onClick: (Data) -> Unit) :
             .with(holder.itemView.context)
             .load(currentGif.images.original.url)
             .placeholder(circularProgressDrawable)
-            .into(holder.itemView.gif_element)
-        holder.itemView.gif_element.setOnClickListener {
+            .into(holder.binding.gifElement)
+        holder.binding.gifElement.setOnClickListener {
             onClick(currentGif)
         }
     }
@@ -50,5 +43,5 @@ class GifAdapter(private val onClick: (Data) -> Unit) :
         notifyDataSetChanged()
     }
 
-    class GifViewHolder(view: View) : RecyclerView.ViewHolder(view)
+    class GifViewHolder(val binding: GifItemBinding) : RecyclerView.ViewHolder(binding.root)
 }

@@ -13,7 +13,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.schooljournal.databinding.FragmentIntroBinding
 import com.example.schooljournal.presentation.initialView.InitialFragment
-import com.example.schooljournal.toast
+import com.example.schooljournal.utils.toast
 
 const val CAMERA_REQUEST = 102
 const val CAMERA_PERMISSION = android.Manifest.permission.CAMERA

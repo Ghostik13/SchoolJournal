@@ -1,15 +1,15 @@
 package com.example.schooljournal.presentation.mainPage.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.schooljournal.*
 import com.example.schooljournal.data.model.Day
+import com.example.schooljournal.databinding.DayHolderBinding
 import com.example.schooljournal.presentation.mainPage.MainPageViewModel
-import kotlinx.android.synthetic.main.day_holder.view.*
+import com.example.schooljournal.utils.Parser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -18,35 +18,32 @@ import kotlinx.coroutines.withContext
 class DayAdapter(private val context: Context, private val vm: MainPageViewModel) :
     RecyclerView.Adapter<DayAdapter.DayViewHolder>() {
 
-    class DayViewHolder(view: View) : RecyclerView.ViewHolder(view)
+    class DayViewHolder(val binding: DayHolderBinding) : RecyclerView.ViewHolder(binding.root)
 
     private var dayList = emptyList<Day>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.day_holder,
-                parent,
-                false
-            )
-        return DayViewHolder(view)
+        val binding =
+            DayHolderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return DayViewHolder(binding)
     }
 
     private lateinit var recyclerView: RecyclerView
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: DayViewHolder, position: Int) {
         val currentDay = dayList[position]
         val month = currentDay.date.toString().substring(4, 6)
         val day = currentDay.date.toString().substring(6, 8)
         val monthString = convertDate(month)
         val parser = Parser("")
-        holder.itemView.day_tv.text = parser.reverseParsingName(currentDay.dayOfTheWeek) + ","
-        holder.itemView.date_tv.text = "$day $monthString"
-        recyclerView = holder.itemView.recycler_subjects
+        holder.binding.dayTv.text = parser.reverseParsingName(currentDay.dayOfTheWeek) + ","
+        holder.binding.dateTv.text = "$day $monthString"
+        recyclerView = holder.binding.recyclerSubjects
         val subjectAdapter = SubjectAdapter(
             vm,
             { subject ->
-                    vm.updateHomework(subject)
+                vm.updateHomework(subject)
             }, context
         )
         GlobalScope.launch(Dispatchers.IO) {

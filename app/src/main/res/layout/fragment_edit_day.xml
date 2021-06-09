@@ -9,7 +9,6 @@
     tools:context=".presentation.settingsView.scheduleEditView.EditDayFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@drawable/toolbar_gradient"
@@ -22,7 +21,6 @@
             android:id="@+id/dow_tv"
             style="@style/tv_dow"
             android:text=""
-            android:textIsSelectable="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -123,10 +121,7 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_back"
-        style="@style/fab"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="64dp"
-        android:scaleType="center"
+        style="@style/fabe"
         android:src="@drawable/plus"
         app:backgroundTint="@color/red"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -135,10 +130,7 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_edit"
-        style="@style/fab"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="64dp"
-        android:scaleType="center"
+        style="@style/fabe"
         android:src="@drawable/plus"
         app:backgroundTint="@color/red"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -1,7 +1,7 @@
 package com.example.schooljournal.presentation.weekDayView
 
 import androidx.lifecycle.*
-import com.example.schooljournal.*
+import com.example.schooljournal.utils.*
 
 class WeekDayViewModel : ViewModel() {
 

@@ -14,7 +14,6 @@ import android.view.Window
 import androidx.fragment.app.DialogFragment
 import com.example.schooljournal.BuildConfig
 import com.example.schooljournal.databinding.FragmentPhotoDialogBinding
-import kotlinx.android.synthetic.main.fragment_photo_dialog.view.*
 import java.io.IOException
 
 class PhotoDialogFragment : DialogFragment() {
@@ -31,7 +30,7 @@ class PhotoDialogFragment : DialogFragment() {
         dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog!!.window!!.requestFeature(Window.FEATURE_NO_TITLE)
         val rotatedBitmap: Bitmap? = setImage()
-        view.image_homework.setImageBitmap(rotatedBitmap)
+        binding.imageHomework.setImageBitmap(rotatedBitmap)
         return view
     }
 

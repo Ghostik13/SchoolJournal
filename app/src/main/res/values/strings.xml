@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">School Journal</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_subject">Введите название предмета …</string>
     <string name="top_text">
         Выберите день\nи введите учебные предметы
@@ -30,6 +29,13 @@
         (для этого необходимо наличие интернета на вашем устройстве).\nПожалуйтста, если вам понравилось это приложение, поделитесь им с друзьями!
     </string>
     <string name="rights">© 2021 Journal All Rights Reserved</string>
+    <string name="desc">123</string>
+    <string name="linkedin_com_in_v_kolesnikov">linkedin.com/in/v-kolesnikov/</string>
+    <string name="t_me_ghost_iks">t.me/ghost_iks</string>
+    <string name="ghost20095_gmail_com">ghost20095@gmail.com</string>
+    <string name="desc_2">desc</string>
+    <string name="edit_schedule_tv">Измените расписание</string>
+    <string name="_16">Сегодня 16 апреля</string>
 
     <string-array name="daysFull">
         <item>Понедельник</item>
@@ -39,16 +45,6 @@
         <item>Пятница</item>
         <item>Суббота</item>
         <item>Воскресенье</item>
-    </string-array>
-
-    <string-array name="daysShort">
-        <item>пн</item>
-        <item>вт</item>
-        <item>ср</item>
-        <item>чт</item>
-        <item>пт</item>
-        <item>сб</item>
-        <item>вс</item>
     </string-array>
 
     <string-array name="months">

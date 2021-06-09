@@ -8,7 +8,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.schooljournal.R
 import com.example.schooljournal.databinding.FragmentSettingsBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.fragment_settings.view.*
 
 class SettingsFragment : BottomSheetDialogFragment() {
 
@@ -21,13 +20,13 @@ class SettingsFragment : BottomSheetDialogFragment() {
     ): View {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         val view = binding.root
-        view.edit_tv.setOnClickListener {
+        binding.editTv.setOnClickListener {
             findNavController().navigate(R.id.action_settingsFragment_to_editScheduleFragment)
         }
-        view.about_tv.setOnClickListener {
+        binding.aboutTv.setOnClickListener {
             findNavController().navigate(R.id.action_settingsFragment_to_aboutFragment)
         }
-        view.connect_tv.setOnClickListener {
+        binding.connectTv.setOnClickListener {
             findNavController().navigate(R.id.action_settingsFragment_to_connectToDevFragment)
         }
         return view

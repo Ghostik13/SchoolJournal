@@ -15,7 +15,9 @@ import com.example.schooljournal.*
 import com.example.schooljournal.databinding.FragmentWeekDaysBinding
 import com.example.schooljournal.presentation.Navigation
 import com.example.schooljournal.presentation.scheduleCreateView.ScheduleCreateFragment
-import kotlinx.android.synthetic.main.fragment_week_days.view.*
+import com.example.schooljournal.utils.DAY_NAME
+import com.example.schooljournal.utils.Parser
+import com.example.schooljournal.utils.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WeekDaysFragment : Fragment() {
@@ -45,11 +47,11 @@ class WeekDaysFragment : Fragment() {
         val view = binding.root
         navigation = requireActivity() as Navigation
         parser = Parser(text.toString())
-        view.dow_tv.text = text
-        initEditList(view)
+        binding.dowTv.text = text
+        initEditList()
         visibilitySet()
-        initFab(view)
-        initNextButton(view)
+        initFab()
+        initNextButton()
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 editStrings = edits.map {
@@ -63,20 +65,20 @@ class WeekDaysFragment : Fragment() {
         return view
     }
 
-    private fun initEditList(view: View) {
+    private fun initEditList() {
         edits = listOf(
-            view.first_subject,
-            view.second_subject,
-            view.third_subject,
-            view.fourth_subject,
-            view.fifth_subject,
-            view.six_subject,
-            view.seventh_subject
+            binding.firstSubject,
+            binding.secondSubject,
+            binding.thirdSubject,
+            binding.fourthSubject,
+            binding.fifthSubject,
+            binding.sixSubject,
+            binding.seventhSubject
         )
     }
 
-    private fun initNextButton(view: View) {
-        view.next_button.setOnClickListener {
+    private fun initNextButton() {
+        binding.nextButton.setOnClickListener {
             editStrings = edits.map {
                 it.text.toString()
             }
@@ -114,13 +116,13 @@ class WeekDaysFragment : Fragment() {
         }
     }
 
-    private fun initFab(view: View) {
+    private fun initFab() {
         val animForFab = AnimationUtils.loadAnimation(
             this.context,
             R.anim.fab_animation
         )
-        view.fab_back.startAnimation(animForFab)
-        view.fab.setOnClickListener {
+        binding.fabBack.startAnimation(animForFab)
+        binding.fab.setOnClickListener {
             val inputMethodManager =
                 requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             when (flag) {

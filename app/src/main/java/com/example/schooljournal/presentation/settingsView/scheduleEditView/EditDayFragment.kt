@@ -13,13 +13,9 @@ import android.widget.EditText
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.schooljournal.Parser
+import com.example.schooljournal.utils.Parser
 import com.example.schooljournal.R
 import com.example.schooljournal.databinding.FragmentEditDayBinding
-import kotlinx.android.synthetic.main.fragment_edit_day.view.*
-import kotlinx.android.synthetic.main.fragment_week_days.view.dow_tv
-import kotlinx.android.synthetic.main.fragment_week_days.view.fab_back
-import kotlinx.android.synthetic.main.fragment_week_days.view.next_button
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EditDayFragment : Fragment() {
@@ -39,18 +35,18 @@ class EditDayFragment : Fragment() {
     ): View {
         _binding = FragmentEditDayBinding.inflate(inflater, container, false)
         val view = binding.root
-        view.dow_tv.text = args.NameOfDay
+        binding.dowTv.text = args.NameOfDay
         parser = Parser(args.NameOfDay)
         dayArray = resources.getStringArray(R.array.daysFull)
-        initNextButton(view)
-        initEditList(view)
+        initNextButton()
+        initEditList()
         initSubjects()
-        initFab(view)
+        initFab()
         return view
     }
 
-    private fun initNextButton(view: View) {
-        view.next_button.setOnClickListener {
+    private fun initNextButton() {
+        binding.nextButton.setOnClickListener {
             viewModel.updateSubjects(
                 edits[0].text.toString(),
                 edits[1].text.toString(),
@@ -73,15 +69,15 @@ class EditDayFragment : Fragment() {
         }
     }
 
-    private fun initEditList(view: View) {
+    private fun initEditList() {
         edits = listOf(
-            view.first_subject_edit,
-            view.second_subject_edit,
-            view.third_subject_edit,
-            view.fourth_subject_edit,
-            view.fifth_subject_edit,
-            view.six_subject_edit,
-            view.seventh_subject_edit
+            binding.firstSubjectEdit,
+            binding.secondSubjectEdit,
+            binding.thirdSubjectEdit,
+            binding.fourthSubjectEdit,
+            binding.fifthSubjectEdit,
+            binding.sixSubjectEdit,
+            binding.seventhSubjectEdit
         )
     }
 
@@ -96,7 +92,6 @@ class EditDayFragment : Fragment() {
     private fun initSubjects() {
         viewModel.getSubjectsForCurrentDay(parser.parsingName)
         viewModel.subjectNames.observe(viewLifecycleOwner, Observer {
-            Log.d("SUB", it.size.toString())
             for (i in 0..6) {
                 insertSubjects(it, i)
             }
@@ -116,13 +111,13 @@ class EditDayFragment : Fragment() {
 
     private var flag = 0
 
-    private fun initFab(view: View) {
+    private fun initFab() {
         val animForFab = AnimationUtils.loadAnimation(
             this.context,
             R.anim.fab_animation
         )
-        view.fab_back.startAnimation(animForFab)
-        view.fab_edit.setOnClickListener {
+        binding.fabBack.startAnimation(animForFab)
+        binding.fabEdit.setOnClickListener {
             val inputMethodManager =
                 requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             when (flag) {

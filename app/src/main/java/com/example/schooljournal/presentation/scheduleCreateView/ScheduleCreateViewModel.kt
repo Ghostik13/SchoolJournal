@@ -3,7 +3,7 @@ package com.example.schooljournal.presentation.scheduleCreateView
 import java.text.SimpleDateFormat
 import android.util.Log
 import androidx.lifecycle.*
-import com.example.schooljournal.*
+import com.example.schooljournal.utils.*
 import com.example.schooljournal.data.model.Day
 import com.example.schooljournal.data.model.Subject
 import com.example.schooljournal.domain.SubjectRepository
