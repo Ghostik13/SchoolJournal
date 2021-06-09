@@ -20,13 +20,13 @@ class SettingsFragment : BottomSheetDialogFragment() {
     ): View {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         val view = binding.root
-        binding.editTv.setOnClickListener {
+        binding.editBtn.setOnClickListener {
             findNavController().navigate(R.id.action_settingsFragment_to_editScheduleFragment)
         }
-        binding.aboutTv.setOnClickListener {
+        binding.aboutBtn.setOnClickListener {
             findNavController().navigate(R.id.action_settingsFragment_to_aboutFragment)
         }
-        binding.connectTv.setOnClickListener {
+        binding.connectBtn.setOnClickListener {
             findNavController().navigate(R.id.action_settingsFragment_to_connectToDevFragment)
         }
         return view

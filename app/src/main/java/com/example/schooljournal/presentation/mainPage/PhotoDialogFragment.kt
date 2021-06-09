@@ -1,5 +1,6 @@
 package com.example.schooljournal.presentation.mainPage
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -13,13 +14,19 @@ import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
 import com.example.schooljournal.BuildConfig
+import com.example.schooljournal.data.model.Subject
 import com.example.schooljournal.databinding.FragmentPhotoDialogBinding
+import com.example.schooljournal.presentation.NavigationActivity
+import java.io.File
 import java.io.IOException
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PhotoDialogFragment : DialogFragment() {
 
-    private var _binding: FragmentPhotoDialogBinding?= null
+    private var _binding: FragmentPhotoDialogBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: MainPageViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +38,39 @@ class PhotoDialogFragment : DialogFragment() {
         dialog!!.window!!.requestFeature(Window.FEATURE_NO_TITLE)
         val rotatedBitmap: Bitmap? = setImage()
         binding.imageHomework.setImageBitmap(rotatedBitmap)
+        binding.closeBtn.setOnClickListener {
+            dismiss()
+        }
+        val pathPhoto = this.arguments?.getString("photo").toString()
+        val id = this.arguments?.getInt("id")
+        val dayId = this.arguments?.getInt("dayId")
+        val dayOfWeek = this.arguments?.getInt("dayOfWeek")
+        val hw = this.arguments?.getString("hw")
+        val name = this.arguments?.getString("name")
+        binding.fabDelete.setOnClickListener {
+            viewModel.updateHomework(
+                Subject(
+                    id!!.toInt(),
+                    dayId!!.toInt(),
+                    name.toString(),
+                    hw.toString(),
+                    dayOfWeek!!.toInt(),
+                    ""
+                )
+            )
+            val file = File(pathPhoto)
+            file.delete()
+            val intent = Intent(requireContext(), NavigationActivity::class.java)
+            startActivity(intent)
+        }
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val attrs = dialog!!.window!!.attributes
+        attrs.width = ViewGroup.LayoutParams.MATCH_PARENT
+        dialog!!.window!!.attributes = attrs
     }
 
     private fun setImage(): Bitmap? {

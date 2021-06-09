@@ -32,6 +32,16 @@ class InitialFragment : Fragment() {
         binding.nextBtn.setOnClickListener {
             (requireActivity() as Navigation).initNavigation(ScheduleCreateFragment())
         }
+        val animForBeams = AnimationUtils.loadAnimation(
+            this.context,
+            R.anim.sunny_animation
+        )
+        binding.ivSun.startAnimation(animForBeams)
+        val animForSun = AnimationUtils.loadAnimation(
+            this.context,
+            R.anim.sun_animation
+        )
+        binding.ivBeams.startAnimation(animForSun)
         return view
     }
 

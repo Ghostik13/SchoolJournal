@@ -41,7 +41,11 @@
     <dialog
         android:id="@+id/photoDialogFragment"
         android:name="com.example.schooljournal.presentation.mainPage.PhotoDialogFragment"
-        android:label="PhotoDialogFragment" />
+        android:label="PhotoDialogFragment" >
+        <action
+            android:id="@+id/action_photoDialogFragment_to_viewPagerFragment"
+            app:destination="@id/viewPagerFragment" />
+    </dialog>
     <fragment
         android:id="@+id/editScheduleFragment"
         android:name="com.example.schooljournal.presentation.settingsView.scheduleEditView.EditScheduleFragment"

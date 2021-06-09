@@ -20,11 +20,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.io.File
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CamActivity : AppCompatActivity() {
 
     private lateinit var photoFile: File
-    private lateinit var viewModel: MainPageViewModel
+    private val viewModel: MainPageViewModel by viewModel()
 
     private lateinit var binding: ActivityCamBinding
 
@@ -35,7 +36,6 @@ class CamActivity : AppCompatActivity() {
         setContentView(view)
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         photoFile = getPhotoFile()
-        viewModel = ViewModelProvider(this).get(MainPageViewModel::class.java)
         val fileProvider =
             FileProvider.getUriForFile(this, "com.example.schooljournal.fileprovider", photoFile)
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider)

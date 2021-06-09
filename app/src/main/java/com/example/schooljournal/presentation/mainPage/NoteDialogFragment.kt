@@ -9,13 +9,13 @@ import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.schooljournal.data.model.Note
 import com.example.schooljournal.databinding.FragmentNoteDialogBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NoteDialogFragment : DialogFragment() {
 
-    private lateinit var viewModel: MainPageViewModel
+    private val viewModel: MainPageViewModel by viewModel()
 
     private var _binding: FragmentNoteDialogBinding?= null
     private val binding get() = _binding!!
@@ -26,7 +26,6 @@ class NoteDialogFragment : DialogFragment() {
     ): View {
         _binding = FragmentNoteDialogBinding.inflate(inflater, container, false)
         val view = binding.root
-        viewModel = ViewModelProvider(this).get(MainPageViewModel::class.java)
         dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog!!.window!!.requestFeature(Window.FEATURE_NO_TITLE)
         initNote()

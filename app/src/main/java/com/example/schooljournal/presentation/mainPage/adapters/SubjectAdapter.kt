@@ -57,6 +57,11 @@ class SubjectAdapter(
                 val dialogFragment = PhotoDialogFragment()
                 val bundle = Bundle()
                 bundle.putString("photo", currentSubject.photo)
+                bundle.putInt("id", currentSubject.id)
+                bundle.putInt("dayId", currentSubject.dayId)
+                bundle.putInt("dayOfWeek", currentSubject.dayOfWeek)
+                bundle.putString("hw", currentSubject.homework)
+                bundle.putString("name", currentSubject.name)
                 dialogFragment.arguments = bundle
                 val myActivity = (context as NavigationActivity)
                 dialogFragment.show(myActivity.supportFragmentManager, "Photo Dialog")
