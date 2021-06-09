@@ -12,17 +12,23 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.schooljournal.R
 import com.example.schooljournal.data.model.Note
+import com.example.schooljournal.databinding.FragmentNoteDialogBinding
+import com.example.schooljournal.databinding.FragmentPhotoDialogBinding
 import kotlinx.android.synthetic.main.fragment_note_dialog.view.*
 
 class NoteDialogFragment : DialogFragment() {
 
     private lateinit var viewModel: MainPageViewModel
 
+    private var _binding: FragmentNoteDialogBinding?= null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_note_dialog, container, false)
+    ): View {
+        _binding = FragmentNoteDialogBinding.inflate(inflater, container, false)
+        val view = binding.root
         viewModel = ViewModelProvider(this).get(MainPageViewModel::class.java)
         dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog!!.window!!.requestFeature(Window.FEATURE_NO_TITLE)

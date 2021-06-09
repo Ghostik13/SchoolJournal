@@ -11,12 +11,11 @@ import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.schooljournal.Parser
 import com.example.schooljournal.R
-import com.example.schooljournal.presentation.mainPage.MainPageViewModel
+import com.example.schooljournal.databinding.FragmentEditDayBinding
 import kotlinx.android.synthetic.main.fragment_edit_day.view.*
 import kotlinx.android.synthetic.main.fragment_week_days.view.dow_tv
 import kotlinx.android.synthetic.main.fragment_week_days.view.fab_back
@@ -31,11 +30,15 @@ class EditDayFragment : Fragment() {
     private val viewModel: EditDayViewModel by viewModel()
     private lateinit var parser: Parser
 
+    private var _binding: FragmentEditDayBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_edit_day, container, false)
+    ): View {
+        _binding = FragmentEditDayBinding.inflate(inflater, container, false)
+        val view = binding.root
         view.dow_tv.text = args.NameOfDay
         parser = Parser(args.NameOfDay)
         dayArray = resources.getStringArray(R.array.daysFull)

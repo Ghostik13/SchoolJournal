@@ -1,7 +1,5 @@
 package com.example.schooljournal.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.example.schooljournal.data.model.Day
 import com.example.schooljournal.data.model.Note

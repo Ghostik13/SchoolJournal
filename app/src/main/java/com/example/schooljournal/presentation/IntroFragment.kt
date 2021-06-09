@@ -2,16 +2,16 @@ package com.example.schooljournal.presentation
 
 import android.app.AlertDialog
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.schooljournal.R
+import com.example.schooljournal.databinding.FragmentIntroBinding
 import com.example.schooljournal.presentation.initialView.InitialFragment
 import com.example.schooljournal.toast
 
@@ -20,12 +20,16 @@ const val CAMERA_PERMISSION = android.Manifest.permission.CAMERA
 
 class IntroFragment : Fragment() {
 
+    private var _binding: FragmentIntroBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_intro, container, false)
-        Handler().postDelayed({
+    ): View {
+        _binding = FragmentIntroBinding.inflate(inflater, container, false)
+        val view = binding.root
+        Handler(Looper.getMainLooper()).postDelayed({
             (requireActivity() as Navigation).initNavigation(InitialFragment())
         }, 3000)
         checkForCameraPermission()
@@ -33,21 +37,19 @@ class IntroFragment : Fragment() {
     }
 
     private fun checkForCameraPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            when {
-                ContextCompat.checkSelfPermission(
-                    requireContext(),
-                    CAMERA_PERMISSION
-                ) == PackageManager.PERMISSION_GRANTED -> {
-                    requireContext().toast(requireContext(), "Permission granted")
-                }
-                shouldShowRequestPermissionRationale(CAMERA_PERMISSION) -> showDialog()
-                else -> ActivityCompat.requestPermissions(
-                    requireActivity(),
-                    arrayOf(CAMERA_PERMISSION),
-                    CAMERA_REQUEST
-                )
+        when {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                CAMERA_PERMISSION
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                requireContext().toast(requireContext(), "Permission granted")
             }
+            shouldShowRequestPermissionRationale(CAMERA_PERMISSION) -> showDialog()
+            else -> ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(CAMERA_PERMISSION),
+                CAMERA_REQUEST
+            )
         }
     }
 
@@ -70,7 +72,6 @@ class IntroFragment : Fragment() {
 
     private fun showDialog() {
         val builder = AlertDialog.Builder(requireContext())
-
         builder.apply {
             setMessage("Permission to access your camera")
             setTitle("Permission required")

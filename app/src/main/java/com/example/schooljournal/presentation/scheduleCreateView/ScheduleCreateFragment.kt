@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.schooljournal.*
+import com.example.schooljournal.databinding.FragmentScheduleCreateBinding
 import com.example.schooljournal.presentation.Navigation
 import com.example.schooljournal.presentation.NavigationActivity
 import kotlinx.android.synthetic.main.fragment_schedule_create.view.*
@@ -18,11 +19,15 @@ class ScheduleCreateFragment : Fragment() {
     private val viewModel: ScheduleCreateViewModel by viewModel()
     private lateinit var nav: Navigation
 
+    private var _binding: FragmentScheduleCreateBinding?= null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_schedule_create, container, false)
+        _binding = FragmentScheduleCreateBinding.inflate(inflater, container, false)
+        val view = binding.root
         nav = activity as Navigation
         initDayButtons(view)
         initReadyButton(view)

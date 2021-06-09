@@ -15,6 +15,7 @@ import com.example.schooljournal.presentation.CAMERA_REQUEST
 import com.example.schooljournal.presentation.NavigationActivity
 import com.example.schooljournal.R
 import com.example.schooljournal.data.model.Subject
+import com.example.schooljournal.databinding.ActivityCamBinding
 import com.example.schooljournal.toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -26,9 +27,11 @@ class CamActivity : AppCompatActivity() {
     private lateinit var photoFile: File
     private lateinit var viewModel: MainPageViewModel
 
+    private lateinit var binding: ActivityCamBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cam)
+        binding = ActivityCamBinding.inflate(layoutInflater)
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         photoFile = getPhotoFile()
         viewModel = ViewModelProvider(this).get(MainPageViewModel::class.java)

@@ -6,17 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import com.example.schooljournal.R
+import com.example.schooljournal.databinding.FragmentViewPagerBinding
 import com.example.schooljournal.fragments
-import com.example.schooljournal.presentation.Navigation
 import com.example.schooljournal.presentation.mainPage.adapters.ViewPagerAdapter
-import com.example.schooljournal.presentation.scheduleCreateView.ScheduleCreateFragment
 import kotlinx.android.synthetic.main.fragment_view_pager.view.*
 import java.util.ArrayList
 
 class ViewPagerFragment : Fragment() {
 
     private lateinit var adapter: ViewPagerAdapter
+
+    private var _binding: FragmentViewPagerBinding?= null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +27,9 @@ class ViewPagerFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_view_pager, container, false)
+    ): View {
+        _binding = FragmentViewPagerBinding.inflate(inflater, container, false)
+        val view = binding.root
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 requireActivity().finishAffinity()

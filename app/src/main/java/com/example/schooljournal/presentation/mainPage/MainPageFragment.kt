@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.schooljournal.*
+import com.example.schooljournal.databinding.FragmentMainPageBinding
+import com.example.schooljournal.databinding.FragmentNoteDialogBinding
 import com.example.schooljournal.presentation.mainPage.adapters.DayAdapter
 import kotlinx.android.synthetic.main.fragment_main_page.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -21,6 +23,9 @@ class MainPageFragment : Fragment() {
 
     private val viewModel: MainPageViewModel by viewModel()
     private lateinit var recyclerViewDays: RecyclerView
+
+    private var _binding: FragmentMainPageBinding?= null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,8 +39,9 @@ class MainPageFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_main_page, container, false)
+    ): View {
+        _binding = FragmentMainPageBinding.inflate(inflater, container, false)
+        val view = binding.root
         initRecyclerView(view)
         changeWeeks(view)
         initAddNoteFab(view)

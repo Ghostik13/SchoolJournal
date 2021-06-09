@@ -5,7 +5,7 @@ import com.example.schooljournal.data.model.Subject
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-class ToFromSubjectConverter {
+class SubjectConverter {
 
     @TypeConverter
     fun fromSubjectList(subjects: List<Subject?>?): String? {

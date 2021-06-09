@@ -2,7 +2,6 @@ package com.example.schooljournal.presentation.weekDayView
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,10 +11,9 @@ import android.widget.EditText
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.schooljournal.*
+import com.example.schooljournal.databinding.FragmentWeekDaysBinding
 import com.example.schooljournal.presentation.Navigation
-import com.example.schooljournal.presentation.mainPage.MainPageViewModel
 import com.example.schooljournal.presentation.scheduleCreateView.ScheduleCreateFragment
 import kotlinx.android.synthetic.main.fragment_week_days.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -36,11 +34,15 @@ class WeekDaysFragment : Fragment() {
         }
     }
 
+    private var _binding: FragmentWeekDaysBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_week_days, container, false)
+        _binding = FragmentWeekDaysBinding.inflate(inflater, container, false)
+        val view = binding.root
         navigation = requireActivity() as Navigation
         parser = Parser(text.toString())
         view.dow_tv.text = text

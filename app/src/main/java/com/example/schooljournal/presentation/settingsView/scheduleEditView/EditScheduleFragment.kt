@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.schooljournal.R
+import com.example.schooljournal.databinding.FragmentEditSchedulereBinding
+import com.example.schooljournal.databinding.FragmentSettingsBinding
 import kotlinx.android.synthetic.main.fragment_schedule_create.view.fr_btn
 import kotlinx.android.synthetic.main.fragment_schedule_create.view.mo_btn
 import kotlinx.android.synthetic.main.fragment_schedule_create.view.ready_btn
@@ -20,11 +22,15 @@ class EditScheduleFragment : Fragment() {
 
     private lateinit var dayArray: Array<String>
 
+    private var _binding: FragmentEditSchedulereBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_edit_schedulere, container, false)
+    ): View {
+        _binding = FragmentEditSchedulereBinding.inflate(inflater, container, false)
+        val view = binding.root
         dayArray = resources.getStringArray(R.array.daysFull)
         initDayButtons(view)
         initReadyButton(view)

@@ -7,10 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.schooljournal.presentation.Navigation
 import com.example.schooljournal.R
-import com.example.schooljournal.presentation.mainPage.MainPageViewModel
+import com.example.schooljournal.databinding.FragmentInitialBinding
 import com.example.schooljournal.presentation.scheduleCreateView.ScheduleCreateFragment
 import kotlinx.android.synthetic.main.fragment_initial.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -20,11 +19,15 @@ class InitialFragment : Fragment() {
     private val viewModel: InitialViewModel by viewModel()
     private lateinit var months: Array<String>
 
+    private var _binding: FragmentInitialBinding?= null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_initial, container, false)
+    ): View {
+        _binding = FragmentInitialBinding.inflate(inflater, container, false)
+        val view = binding.root
         months = resources.getStringArray(R.array.months)
         initDate(view)
         view.next_btn.setOnClickListener {

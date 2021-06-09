@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.rest.Constants
-import com.example.rest.R
+import com.example.rest.databinding.FragmentRestBinding
 import kotlinx.android.synthetic.main.fragment_rest.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -19,6 +19,9 @@ class RestFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var searchView: SearchView
+
+    private var _binding: FragmentRestBinding? = null
+    private val binding get() = _binding!!
 
     private val viewModel: GifViewModel by viewModel()
     private val adapter by lazy {
@@ -33,12 +36,13 @@ class RestFragment : Fragment(), SearchView.OnQueryTextListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_rest, container, false)
+    ): View {
+        _binding = FragmentRestBinding.inflate(inflater, container, false)
+        val view = binding.root
         initSearchView(view)
         observeConnectionException(view)
         initRecyclerView(view)
-        initTrendGifs(view)
+        initTrendGifs()
         return view
     }
 
@@ -55,7 +59,7 @@ class RestFragment : Fragment(), SearchView.OnQueryTextListener {
         searchView.setOnQueryTextListener(this)
     }
 
-    private fun initTrendGifs(view: View) {
+    private fun initTrendGifs() {
         viewModel.getTrendGifs()
         viewModel.gifTrendResponse.observe(viewLifecycleOwner, Observer { main ->
             main.data.let {

@@ -13,17 +13,21 @@ import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
 import com.example.schooljournal.BuildConfig
-import com.example.schooljournal.R
+import com.example.schooljournal.databinding.FragmentPhotoDialogBinding
 import kotlinx.android.synthetic.main.fragment_photo_dialog.view.*
 import java.io.IOException
 
 class PhotoDialogFragment : DialogFragment() {
 
+    private var _binding: FragmentPhotoDialogBinding?= null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_photo_dialog, container, false)
+    ): View {
+        _binding = FragmentPhotoDialogBinding.inflate(inflater, container, false)
+        val view = binding.root
         dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog!!.window!!.requestFeature(Window.FEATURE_NO_TITLE)
         val rotatedBitmap: Bitmap? = setImage()

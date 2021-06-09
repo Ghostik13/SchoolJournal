@@ -1,7 +1,7 @@
 package com.example.schooljournal.data.model
 
 import androidx.room.*
-import com.example.schooljournal.data.converters.ToFromSubjectConverter
+import com.example.schooljournal.data.converters.SubjectConverter
 
 @Entity(tableName = "day_table")
 data class Day(
@@ -10,7 +10,7 @@ data class Day(
     val weekId: Int,
     val date: Int,
     val dayOfTheWeek: Int,
-    @TypeConverters(ToFromSubjectConverter::class)
+    @TypeConverters(SubjectConverter::class)
     val subjects: List<Subject>
 )
 

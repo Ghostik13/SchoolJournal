@@ -1,8 +1,5 @@
 package com.example.rest.presentation
 
-import android.util.Log
-import android.widget.EditText
-import androidx.databinding.ObservableInt
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

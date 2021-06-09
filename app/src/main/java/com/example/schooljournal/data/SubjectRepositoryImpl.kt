@@ -1,6 +1,5 @@
 package com.example.schooljournal.data
 
-import androidx.lifecycle.LiveData
 import com.example.schooljournal.data.model.Day
 import com.example.schooljournal.data.model.Note
 import com.example.schooljournal.data.model.Subject

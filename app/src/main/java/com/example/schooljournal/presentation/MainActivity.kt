@@ -6,13 +6,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.schooljournal.R
+import com.example.schooljournal.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), Navigation {
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        if(firstRunFinished()) {
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        if (firstRunFinished()) {
             startActivity(Intent(this, NavigationActivity::class.java))
         } else initFragment()
     }
