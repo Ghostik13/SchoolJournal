@@ -42,7 +42,7 @@ class CamActivity : AppCompatActivity() {
         try {
             ActivityCompat.startActivityForResult(this, intent, CAMERA_REQUEST, null)
         } catch (e: ActivityNotFoundException) {
-            this.toast(this, "Что-то пошло не так...")
+            this.toast("Что-то пошло не так...")
         }
     }
 

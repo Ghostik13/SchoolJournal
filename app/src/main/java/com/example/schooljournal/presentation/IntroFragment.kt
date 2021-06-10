@@ -42,7 +42,7 @@ class IntroFragment : Fragment() {
                 requireContext(),
                 CAMERA_PERMISSION
             ) == PackageManager.PERMISSION_GRANTED -> {
-                requireContext().toast(requireContext(), "Permission granted")
+                requireContext().toast("Permission granted")
             }
             shouldShowRequestPermissionRationale(CAMERA_PERMISSION) -> showDialog()
             else -> ActivityCompat.requestPermissions(
@@ -61,8 +61,8 @@ class IntroFragment : Fragment() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         fun innerCheck() {
             if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                requireContext().toast(requireContext(), "Camera permission refused")
-            } else requireContext().toast(requireContext(), "Camera permission granted")
+                requireContext().toast("Camera permission refused")
+            } else requireContext().toast("Camera permission granted")
         }
 
         when (requestCode) {

@@ -29,8 +29,8 @@ val sun = MutableList(size) {emptySubject}
 const val DAY_NAME = "DAY_NAME"
 const val WEEK_ID = "WEEK_ID"
 
-fun Context.toast(context: Context, message: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(context, message, duration).show()
+fun Context.toast(message: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(this, message, duration).show()
 }
 
 var fragments = arrayListOf<Fragment>()
