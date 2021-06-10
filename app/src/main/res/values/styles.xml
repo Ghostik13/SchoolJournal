@@ -172,21 +172,6 @@
         <item name="android:scaleType">center</item>
     </style>
 
-    <style name="initial_text">
-        <item name="android:layout_width">380dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">40dp</item>
-        <item name="android:fontFamily">@font/myriad_regular</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textSize">18sp</item>
-    </style>
-
-    <style name="initial_logo">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">60dp</item>
-        <item name="android:layout_marginTop">24dp</item>
-    </style>
-
     <style name="make_tv">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

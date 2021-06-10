@@ -12,12 +12,10 @@
     <string name="sat">Сб</string>
     <string name="sun">Вс</string>
     <string name="ready">Готово</string>
-    <string name="intro_text">Приветствуем Вас в приложении Дневник. Чтобы начать пользоваться Дневником составьте расписание учебных предметов.</string>
     <string name="schedule">РАСПИСАНИЕ</string>
     <string name="rightnow">Прямо сейчас</string>
     <string name="create">Составьте</string>
     <string name="my_note">Моя заметка</string>
-    <string name="add">Добавить</string>
     <string name="connect_to_dev">Связаться с разработчиком</string>
     <string name="edit_schedule">Изменить расписание</string>
     <string name="about">О приложении</string>
