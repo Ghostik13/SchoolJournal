@@ -14,6 +14,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.time.Month
+import java.time.format.TextStyle
+import java.util.*
 
 class DayAdapter(private val context: Context, private val vm: MainPageViewModel) :
     RecyclerView.Adapter<DayAdapter.DayViewHolder>() {
@@ -37,7 +40,7 @@ class DayAdapter(private val context: Context, private val vm: MainPageViewModel
         val day = currentDay.date.toString().substring(6, 8)
         val monthString = convertDate(month)
         val parser = Parser("")
-        holder.binding.dayTv.text = parser.reverseParsingName(currentDay.dayOfTheWeek) + ","
+        holder.binding.dayTv.text = "${parser.reverseParsingName(currentDay.dayOfTheWeek)},"
         holder.binding.dateTv.text = "$day $monthString"
         recyclerView = holder.binding.recyclerSubjects
         val subjectAdapter = SubjectAdapter(
@@ -66,21 +69,29 @@ class DayAdapter(private val context: Context, private val vm: MainPageViewModel
         notifyDataSetChanged()
     }
 
+    private fun getMonth(i: Int): String {
+        var month = Month.of(i).getDisplayName(TextStyle.FULL , Locale.getDefault())
+        if(Locale.getDefault() == Locale("ru","RU")) {
+            month = "${month.substring(0, month.lastIndex)}я"
+        }
+        return month
+    }
+
     private fun convertDate(month: String): String? {
         var monthString: String? = null
         when (month) {
-            "01" -> monthString = "января"
-            "02" -> monthString = "февраля"
-            "03" -> monthString = "марта"
-            "04" -> monthString = "апреля"
-            "05" -> monthString = "мая"
-            "06" -> monthString = "июня"
-            "07" -> monthString = "июля"
-            "08" -> monthString = "августа"
-            "09" -> monthString = "сентября"
-            "10" -> monthString = "октября"
-            "11" -> monthString = "ноября"
-            "12" -> monthString = "декабря"
+            "01" -> monthString = getMonth(1)
+            "02" -> monthString = getMonth(2)
+            "03" -> monthString = getMonth(3)
+            "04" -> monthString = getMonth(4)
+            "05" -> monthString = getMonth(5)
+            "06" -> monthString = getMonth(6)
+            "07" -> monthString = getMonth(7)
+            "08" -> monthString = getMonth(8)
+            "09" -> monthString = getMonth(9)
+            "10" -> monthString = getMonth(10)
+            "11" -> monthString = getMonth(11)
+            "12" -> monthString = getMonth(12)
         }
         return monthString
     }

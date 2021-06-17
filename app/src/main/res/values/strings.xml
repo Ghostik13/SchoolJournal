@@ -19,6 +19,7 @@
     <string name="connect_to_dev">Связаться с разработчиком</string>
     <string name="edit_schedule">Изменить расписание</string>
     <string name="about">О приложении</string>
+    <string name="today">Сегодня</string>
     <string name="header_about">О приложении «Дневник»</string>
     <string name="info">
         Приложение «Дневник» создано для упрощения жизни учащихся в среднеобразовательных учебных заведениях.

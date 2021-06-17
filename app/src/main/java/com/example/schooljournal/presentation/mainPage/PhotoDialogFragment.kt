@@ -34,8 +34,8 @@ class PhotoDialogFragment : DialogFragment() {
     ): View {
         _binding = FragmentPhotoDialogBinding.inflate(inflater, container, false)
         val view = binding.root
-        dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog!!.window!!.requestFeature(Window.FEATURE_NO_TITLE)
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
         val rotatedBitmap: Bitmap? = setImage()
         binding.imageHomework.setImageBitmap(rotatedBitmap)
         binding.closeBtn.setOnClickListener {
@@ -50,11 +50,11 @@ class PhotoDialogFragment : DialogFragment() {
         binding.fabDelete.setOnClickListener {
             viewModel.updateHomework(
                 Subject(
-                    id!!.toInt(),
-                    dayId!!.toInt(),
+                    id?: 1,
+                    dayId?: 1,
                     name.toString(),
                     hw.toString(),
-                    dayOfWeek!!.toInt(),
+                    dayOfWeek?:1,
                     ""
                 )
             )
@@ -68,9 +68,9 @@ class PhotoDialogFragment : DialogFragment() {
 
     override fun onResume() {
         super.onResume()
-        val attrs = dialog!!.window!!.attributes
-        attrs.width = ViewGroup.LayoutParams.MATCH_PARENT
-        dialog!!.window!!.attributes = attrs
+        val attrs = dialog?.window?.attributes
+        attrs?.width = ViewGroup.LayoutParams.MATCH_PARENT
+        dialog?.window?.attributes = attrs
     }
 
     private fun setImage(): Bitmap? {
@@ -85,7 +85,7 @@ class PhotoDialogFragment : DialogFragment() {
         if (BuildConfig.DEBUG && ei == null) {
             error("Assertion failed")
         }
-        val orientation = ei!!.getAttributeInt(
+        val orientation = ei?.getAttributeInt(
             ExifInterface.TAG_ORIENTATION,
             ExifInterface.ORIENTATION_UNDEFINED
         )

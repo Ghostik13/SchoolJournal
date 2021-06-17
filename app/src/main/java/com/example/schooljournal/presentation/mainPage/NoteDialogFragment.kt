@@ -26,15 +26,15 @@ class NoteDialogFragment : DialogFragment() {
     ): View {
         _binding = FragmentNoteDialogBinding.inflate(inflater, container, false)
         val view = binding.root
-        dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog!!.window!!.requestFeature(Window.FEATURE_NO_TITLE)
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
         initNote()
         return view
     }
 
     private fun initNote() {
         val weekIdNull = this.arguments?.getInt("weekId")
-        val weekId: Int = weekIdNull!!.toInt()
+        val weekId: Int = weekIdNull?: 0
         viewModel.getNote(weekId.toString().toInt())
         viewModel.note.observe(viewLifecycleOwner, Observer {
             if (it != null) {

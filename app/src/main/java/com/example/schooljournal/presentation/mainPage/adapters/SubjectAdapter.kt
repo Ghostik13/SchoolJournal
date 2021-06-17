@@ -87,7 +87,7 @@ class SubjectAdapter(
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val timer = object : CountDownTimer(10000, 1000) {
+                val timer = object : CountDownTimer(3000, 1000) {
                     override fun onTick(millisUntilFinished: Long) {}
 
                     override fun onFinish() {
